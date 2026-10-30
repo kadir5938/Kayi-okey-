@@ -113,14 +113,12 @@ function tileHTML(t){
 
  if(t.fake){
   value = t.n;
- } else if(t.w){
-  value = "★";
  } else {
   value = t.n;
  }
 
  return `<span class="tile ${color}">${value}</span>`;
-   }
+  }
   
 function sortTiles(a){a.sort((x,y)=>x.c-y.c||x.n-y.n);}
 function newGame(){
