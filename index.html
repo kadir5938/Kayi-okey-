@@ -93,17 +93,24 @@ function shuffle(a){
  return a;
 }
 
-function tile(n,c,w=false,fake=false){
 
 function tile(n,c,w=false,fake=false){
  return {
-  n: Number(n),
-  c: Number(c),
-  w: Boolean(w),
-  fake: Boolean(fake)
+  n:Number(n),
+  c:Number(c),
+  w:Boolean(w),
+  fake:Boolean(fake)
  };
 }
 
+function tileHTML(t){
+ if(!t)return "";
+
+ const color=COLORS[t.c] || "black";
+
+ return `<span class="tile ${color}">${t.n}</span>`;
+}
+  
 function tileHTML(t){
  if(!t) return "";
 
