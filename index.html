@@ -193,7 +193,7 @@ function render(){
  hand.forEach((t,i)=>{
   const el=document.createElement("span");
   el.className="tile "+COLORS[t.c]+(selected===i?" selected":"");
-  el.textContent=t.fake||t.w?"★":t.n;
+  el.textContent=t.n;
 
   el.onclick=()=>{
    if(over||thinking)return;
