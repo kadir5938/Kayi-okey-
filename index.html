@@ -170,10 +170,15 @@ function say(s){
 
 function render(){
  document.getElementById("indicator").innerHTML=tileHTML(indicator);
- document.getElementById("joker").innerHTML='<span class="tile '+COLORS[wildColor]+'">★</span>';
-}); class="tile '+COLORS[wildColor]+'">★</span>';;
- document.getElementById("discard").innerHTML=tileHTML(discard[discard.length-1]);
- document.getElementById("stockCount").textContent="Taş havuzu: "+deck.length;
+
+ document.getElementById("joker").innerHTML=
+ tileHTML({n:wildNumber,c:wildColor});
+
+ document.getElementById("discard").innerHTML=
+ tileHTML(discard[discard.length-1]);
+
+ document.getElementById("stockCount").textContent=
+ "Taş havuzu: "+deck.length;
 
  bots.forEach((p,i)=>{
   document.getElementById("p"+i).textContent=p.length+" taş";
@@ -190,9 +195,11 @@ function render(){
 
  const area=document.getElementById("hand");
  area.innerHTML="";
+
  hand.forEach((t,i)=>{
   const el=document.createElement("span");
-  el.className="tile "+COLORS[t.c]+(selected===i?" selected":"");
+  el.className="tile "+COLORS[t.c]+
+  (selected===i?" selected":"");
   el.textContent=t.n;
 
   el.onclick=()=>{
@@ -203,11 +210,6 @@ function render(){
 
   area.appendChild(el);
  });
- }
-
-  area.appendChild(el);
- });
-}
 
 function draw(){
  if(over||thinking||drawn||hand.length!==14||firstTurn){
