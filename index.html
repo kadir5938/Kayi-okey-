@@ -315,24 +315,31 @@ function aiTurn(){
 
 function throwTile(){
  if(over||thinking)return;
+
  if(!firstTurn&&!drawn){
   say("Önce taş çekmelisin.");
   return;
  }
- if(hand.length!==15){
-  say("Atılacak taş bulunamadı.");
-  return;
- }
+
  if(selected<0){
   say("Lütfen atmak istediğin taşı seç.");
   return;
  }
+
+ if(hand.length!==15 && hand.length!==22){
+  say("Taş sayısı hatalı!");
+  return;
+ }
+
  discard.push(hand.splice(selected,1)[0]);
+
  selected=-1;
  drawn=false;
  firstTurn=false;
+
  render();
  say("Taşını attın. Rakipler düşünüyor...");
+
  setTimeout(aiTurn,700);
 }
 
