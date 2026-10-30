@@ -186,6 +186,7 @@ function sortTiles(a){a.sort((x,y)=>x.c-y.c||x.n-y.n);}
  discard.push(deck.pop());
 
  selected=-1;
+ openingSelection=[];
  drawn=false;
  over=false;
  firstTurn=true;
@@ -238,20 +239,19 @@ console.log("ISTAKA TAŞ SAYISI:",hand.length);
   el.onclick=()=>{
  if(over||thinking)return;
 
- selected=selected===i?-1:i;
-
  if(openingSelection.includes(i)){
   openingSelection=openingSelection.filter(x=>x!==i);
  }else{
   openingSelection.push(i);
  }
 
+ selected=i;
  render();
 };
 
-  area.appendChild(el);
- });
-  }
+area.appendChild(el);
+});
+}
 
 function draw(){
 
