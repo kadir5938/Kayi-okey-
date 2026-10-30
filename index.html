@@ -189,7 +189,6 @@ function render(){
 
  const area=document.getElementById("hand");
  area.innerHTML="";
-
  hand.forEach((t,i)=>{
   const el=document.createElement("span");
   el.className="tile "+COLORS[t.c]+(selected===i?" selected":"");
@@ -200,6 +199,10 @@ function render(){
    selected=selected===i?-1:i;
    render();
   };
+
+  area.appendChild(el);
+ });
+ }
 
   area.appendChild(el);
  });
