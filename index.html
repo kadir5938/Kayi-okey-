@@ -1,1 +1,136 @@
 
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kayı Okey</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#075b43;color:white;font-family:Arial;text-align:center}
+header{background:#063c30;padding:15px;font-size:25px;font-weight:bold}
+.info{padding:12px}
+.table{margin:15px auto;background:#126b4d;border:8px solid #704522;border-radius:35px;width:94%;max-width:600px;min-height:360px;padding:18px;display:flex;flex-direction:column;justify-content:space-between}
+.player{padding:10px;background:#084c39;border-radius:12px}
+.middle{display:flex;justify-content:center;align-items:center;gap:20px;padding:15px}
+.tile{display:inline-flex;align-items:center;justify-content:center;width:34px;height:48px;margin:2px;background:#fff;border-radius:5px;color:#d22;font-size:22px;font-weight:bold;box-shadow:0 2px 4px #222}
+.blue{color:#1764c0}.black{color:#222}.red{color:#d22}.yellow{color:#d49a00}
+.hand{padding:10px 3px;min-height:85px;display:flex;justify-content:center;flex-wrap:wrap}
+.hand .tile{cursor:pointer}
+.selected{transform:translateY(-10px);border:3px solid #ffcc00}
+button{border:0;border-radius:9px;padding:12px 18px;margin:5px;background:#ffcc32;color:#222;font-weight:bold;font-size:15px}
+.status{padding:12px;color:#ffe48a;min-height:45px}
+</style>
+</head>
+<body>
+<header>🀄 KAYI OKEY</header>
+<div class="info">Klasik Okey | 4 Oyuncu</div>
+<div class="table">
+ <div class="player">🤖 Rakip 2 <span id="n2"></span></div>
+ <div class="player">🤖 Rakip 1 <span id="n1"></span></div>
+ <div class="middle">
+  <div>Gösterge<br><div id="indicator"></div></div>
+  <div>Okey<br><div id="joker"></div></div>
+  <div>Atılan<br><div id="discardTop"></div></div>
+ </div>
+ <div class="player">🤖 Rakip 3 <span id="n3"></span></div>
+</div>
+<div class="status" id="status">Oyun hazırlanıyor...</div>
+<div><button onclick="drawDeck()">Taş Çek</button>
+<button onclick="takeDiscard()">Yerden Al</button>
+<button onclick="newGame()">Yeni Oyun</button></div>
+<h3>Senin Taşların</h3>
+<div class="hand" id="hand"></div>
+<div class="status">Önce taş çek, sonra atmak istediğin taşa dokun.</div>
+<script>
+const colors=["red","blue","yellow","black"];
+let deck=[],hand=[],discard=[],players=[],selected=null,turn=true,indicator,okey,finished=false;
+
+function makeTile(n,c){return {n,c}}
+function tileHTML(t){
+ if(!t)return "";
+ return `<span class="tile ${t.c}">${t.n}</span>`;
+}
+function shuffle(a){
+ for(let i=a.length-1;i>0;i--){
+  let j=Math.floor(Math.random()*(i+1));
+  [a[i],a[j]]=[a[j],a[i]];
+ }
+ return a;
+}
+function newGame(){
+ deck=[];
+ for(let set=0;set<2;set++)
+  for(let c of colors)
+   for(let n=1;n<=13;n++)deck.push(makeTile(n,c));
+ deck.push({n:"★",c:"black",joker:true},{n:"★",c:"black",joker:true});
+ shuffle(deck);
+ hand=[];discard=[];players=[[],[],[]];
+ for(let i=0;i<14;i++){
+  hand.push(deck.pop());
+  players.forEach(p=>p.push(deck.pop()));
+ }
+ hand.push(deck.pop());
+ indicator=deck.pop();
+ okey=makeTile(indicator.n===13?1:indicator.n+1,indicator.c);
+ discard.push(deck.pop());
+ selected=null;turn=true;finished=false;
+ document.getElementById("indicator").innerHTML=tileHTML(indicator);
+ document.getElementById("joker").innerHTML=tileHTML(okey);
+ message("Oyun başladı! İlk taşı at.");
+ render();
+}
+function message(s){document.getElementById("status").textContent=s}
+function render(){
+ document.getElementById("hand").innerHTML="";
+ hand.forEach((t,i)=>{
+  let el=document.createElement("span");
+  el.className="tile "+t.c+(selected===i?" selected":"");
+  el.textContent=t.n;
+  el.onclick=()=>choose(i);
+  document.getElementById("hand").appendChild(el);
+ });
+ document.getElementById("discardTop").innerHTML=tileHTML(discard[discard.length-1]);
+ players.forEach((p,i)=>document.getElementById("n"+(i+1)).textContent=" • "+p.length+" taş");
+}
+function choose(i){
+ if(!turn||finished)return;
+ if(hand.length!==15){message("Önce taş çekmelisin.");return}
+ selected=i;
+ render();
+ let t=hand[i];
+ message(t.n+" taşını seçtin. Atmak için tekrar dokun.");
+ if(selected===i){
+  hand.splice(i,1);selected=null;
+  discard.push(t);render();
+  turn=false;
+  message("Taş atıldı. Rakipler oynuyor...");
+  setTimeout(aiTurn,700);
+ }
+}
+function drawDeck(){
+ if(!turn||finished||hand.length!==14)return;
+ if(!deck.length){message("Taşlar bitti! Yeni oyun başlat.");finished=true;return}
+ hand.push(deck.pop());render();message("Taş çektin. Şimdi bir taş at.");
+}
+function takeDiscard(){
+ if(!turn||finished||hand.length!==14)return;
+ if(!discard.length)return;
+ hand.push(discard.pop());render();message("Yerden taşı aldın. Şimdi bir taş at.");
+}
+function aiTurn(){
+ for(let i=0;i<3;i++){
+  if(!deck.length)break;
+  players[i].push(deck.pop());
+  let idx=Math.floor(Math.random()*players[i].length);
+  let t=players[i].splice(idx,1)[0];
+  discard.push(t);
+ }
+ turn=true;
+ render();
+ message("Sıra sende! Taş çek veya yerdeki taşı al.");
+}
+newGame();
+</script>
+</body>
+</html>
