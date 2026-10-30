@@ -8,131 +8,42 @@
 <title>Kayı Okey</title>
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;background:radial-gradient(circle at top,#174d3d,#061b17 75%);
- color:#fff;font-family:Arial,sans-serif;text-align:center;
- min-height:100vh
-}
-header{
- padding:17px 10px;background:#071d19;
- border-bottom:2px solid #d9b65c;
- box-shadow:0 4px 18px #0008
-}
+body{margin:0;background:radial-gradient(circle at top,#174d3d,#061b17 75%);color:white;font-family:Arial,sans-serif;text-align:center;min-height:100vh}
+header{padding:17px 10px;background:#071d19;border-bottom:2px solid #d9b65c}
 .logo{font-size:29px;font-weight:900;color:#f4d47e;letter-spacing:3px}
 .subtitle{font-size:10px;letter-spacing:2px;color:#b9c9bd;margin-top:6px}
 main{max-width:760px;margin:auto;padding:12px}
-.scorebar{
- display:flex;justify-content:space-between;align-items:center;
- background:#102e25;border:1px solid #9b8045;border-radius:12px;
- padding:12px 14px;font-size:13px
-}
-.table{
- position:relative;margin-top:14px;padding:17px 10px;
- min-height:390px;border:9px solid #674322;border-radius:35px;
- background:radial-gradient(ellipse at center,#27825a,#07513c 75%);
- box-shadow:inset 0 0 30px #001c12,0 8px 20px #0008;
- display:flex;flex-direction:column;justify-content:space-between
-}
-.opponents{display:flex;justify-content:space-around;gap:7px}
-.player{
- flex:1;max-width:145px;padding:10px 4px;
- background:linear-gradient(145deg,#123c30,#08271f);
- border:1px solid #c5a65b;border-radius:13px;
- box-shadow:0 4px 9px #0005;font-size:12px
-}
+.scorebar{display:flex;justify-content:space-between;background:#102e25;border:1px solid #9b8045;border-radius:12px;padding:12px 14px;font-size:13px}
+.table{margin-top:14px;padding:17px 8px;min-height:390px;border:9px solid #674322;border-radius:35px;background:radial-gradient(ellipse at center,#27825a,#07513c 75%);box-shadow:inset 0 0 30px #001c12,0 8px 20px #0008;display:flex;flex-direction:column;justify-content:space-between}
+.opponents{display:flex;justify-content:space-around;gap:6px}
+.player{flex:1;min-width:0;max-width:160px;padding:10px 3px;background:linear-gradient(145deg,#123c30,#08271f);border:1px solid #c5a65b;border-radius:13px;font-size:12px}
 .player strong{display:block;color:#f4d47e;margin-bottom:6px;font-size:13px}
-.player span{color:#d8e8dc}
-.middle{
- display:flex;justify-content:center;align-items:center;
- flex-wrap:wrap;gap:13px;padding:20px 0
-}
-.pile{
- min-width:77px;padding:9px 5px;
- background:#063d2d88;border:1px solid #ffffff25;
- border-radius:12px;font-size:10px;letter-spacing:1px;color:#f5dfaa
-}
+.player span{color:#d8e8dc;font-size:11px}
+.rack{display:flex;justify-content:center;align-items:center;flex-wrap:nowrap;gap:1px;margin-top:9px;min-height:29px;padding:4px 2px;background:#061e18;border-radius:5px;overflow:hidden}
+.back-tile{width:7px;height:23px;flex:0 0 7px;border:1px solid #e0c477;border-radius:3px;background:repeating-linear-gradient(45deg,#174b86,#174b86 3px,#2869a5 3px,#2869a5 6px);box-shadow:0 2px 3px #0008}
+.middle{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:13px;padding:20px 0}
+.pile{min-width:77px;padding:9px 5px;background:#063d2d88;border:1px solid #ffffff25;border-radius:12px;font-size:10px;letter-spacing:1px;color:#f5dfaa}
 .pile .tile{margin-top:9px}
-.tile{
- width:36px;height:52px;display:inline-flex;
- align-items:center;justify-content:center;
- background:linear-gradient(135deg,#fff,#e9e5d8);
- border:1px solid #bdb8a8;border-radius:6px;
- box-shadow:0 3px 5px #0006;
- font-size:23px;font-weight:900;margin:2px;
- cursor:pointer;user-select:none;color:#222;
- transition:transform .15s,border .15s
-}
-.red{color:#e32636}.blue{color:#1768c7}
-.black{color:#222}.yellow{color:#c28b00}
-.selected{
- transform:translateY(-13px);
- border:3px solid #f4c95d;
- box-shadow:0 0 10px #f4c95d88
-}
-#status{
- padding:13px;margin:12px 0;min-height:46px;
- color:#ffe7a6;background:#082b21;
- border:1px solid #9b8045;border-radius:11px;
- font-size:13px;line-height:1.5
-}
-.section-title{
- color:#f4d47e;font-size:16px;
- margin:22px 0 10px;letter-spacing:1px
-}
-.hand{
- min-height:94px;padding:13px 4px;
- display:flex;justify-content:center;align-items:center;
- flex-wrap:wrap;gap:1px;
- background:linear-gradient(145deg,#102f25,#071f19);
- border:1px solid #b49c5e;border-radius:14px;
- box-shadow:inset 0 0 15px #0005
-}
-.controls{
- display:grid;grid-template-columns:repeat(2,1fr);
- gap:9px;margin-top:15px
-}
-button{
- padding:14px 8px;border:1px solid #ffe5a0;
- border-radius:10px;background:linear-gradient(145deg,#f8dc8c,#c99c3d);
- color:#282318;font-weight:900;font-size:14px;
- cursor:pointer;box-shadow:0 3px 7px #0005
-}
+.tile{width:36px;height:52px;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#fff,#e9e5d8);border:1px solid #bdb8a8;border-radius:6px;box-shadow:0 3px 5px #0006;font-size:23px;font-weight:900;margin:2px;cursor:pointer;user-select:none;color:#222}
+.red{color:#e32636}.blue{color:#1768c7}.black{color:#222}.yellow{color:#c28b00}
+.selected{transform:translateY(-13px);border:3px solid #f4c95d;box-shadow:0 0 10px #f4c95d88}
+#status{padding:13px;margin:12px 0;min-height:46px;color:#ffe7a6;background:#082b21;border:1px solid #9b8045;border-radius:11px;font-size:13px;line-height:1.5}
+.section-title{color:#f4d47e;font-size:16px;margin:22px 0 10px;letter-spacing:1px}
+.hand{min-height:94px;padding:13px 4px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:1px;background:linear-gradient(145deg,#102f25,#071f19);border:1px solid #b49c5e;border-radius:14px;box-shadow:inset 0 0 15px #0005}
+.controls{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:15px}
+button{padding:14px 8px;border:1px solid #ffe5a0;border-radius:10px;background:linear-gradient(145deg,#f8dc8c,#c99c3d);color:#282318;font-weight:900;font-size:14px;cursor:pointer}
 button:active{transform:scale(.97)}
-button:disabled{opacity:.4}
-button:last-child{
- background:linear-gradient(145deg,#315b4b,#173b30);
- color:white;border-color:#7ba58e
-}
+button:last-child{background:linear-gradient(145deg,#315b4b,#173b30);color:white;border-color:#7ba58e}
 .footer{padding:22px 5px;color:#9bb7a8;font-size:11px;line-height:1.8}
 @media(max-width:400px){
  .tile{width:29px;height:43px;font-size:18px;margin:1px}
  .table{min-height:350px;padding:12px 5px}
  .player{font-size:10px;padding:9px 2px}
  .player strong{font-size:11px}
+ .back-tile{width:6px;flex-basis:6px;height:20px}
  button{padding:13px 5px;font-size:12px}
  .logo{font-size:25px}
-}.rack{
- display:flex;
- justify-content:center;
- flex-wrap:wrap;
- gap:1px;
- margin-top:8px;
- min-height:25px;
 }
-.back-tile{
- width:7px;
- height:23px;
- flex:0 0 7px;
- border:1px solid #e0c477;
- border-radius:3px;
- background:repeating-linear-gradient(
-  45deg,#174b86,#174b86 3px,#2869a5 3px,#2869a5 6px
- );
- box-shadow:0 2px 3px #0008;
-}
-@media(max-width:400px){
- .back-tile{width:5px;flex-basis:5px;height:20px}
- }
 </style>
 </head>
 <body>
@@ -145,13 +56,184 @@ button:last-child{
   <span>🏆 OKEY MASASI</span>
   <span id="stockCount">Taş havuzu: 0</span>
  </div>
-
  <section class="table">
   <div class="opponents">
-     if(i===index)continue;
+   <div class="player"><strong>🤖 ALİ</strong><span id="p0">14 taş</span><div class="rack" id="rack0"></div></div>
+   <div class="player"><strong>🤖 MEHMET</strong><span id="p1">14 taş</span><div class="rack" id="rack1"></div></div>
+   <div class="player"><strong>🤖 HASAN</strong><span id="p2">14 taş</span><div class="rack" id="rack2"></div></div>
+  </div>
+  <div class="middle">
+   <div class="pile">GÖSTERGE<div id="indicator"></div></div>
+   <div class="pile">OKEY<div id="joker"></div></div>
+   <div class="pile">ATILAN<div id="discard"></div></div>
+  </div>
+  <div id="status">Kayı Okey'e hoş geldin!</div>
+ </section>
+ <h3 class="section-title">🎴 SENİN ISTAKAN</h3>
+ <div id="hand" class="hand"></div>
+ <div class="controls">
+  <button onclick="draw()">⬇ Taş Çek</button>
+  <button onclick="take()">↗ Yerden Al</button>
+  <button onclick="throwTile()">🀄 Taş At</button>
+  <button onclick="newGame()">🔄 Yeni Oyun</button>
+ </div>
+ <div class="footer">KAYI OKEY © 2026<br>İyi eğlenceler!</div>
+</main>
+ <script>
+const COLORS=["red","blue","black","yellow"];
+let deck=[],hand=[],bots=[],discard=[];
+let indicator,selected=-1,drawn=false,over=false,firstTurn=true;
+let wildNumber=0,wildColor=0,thinking=false;
+
+function shuffle(a){
+ for(let i=a.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [a[i],a[j]]=[a[j],a[i]];
+ }
+ return a;
+}
+
+function tile(n,c,w=false,fake=false){return {n,c,w,fake};}
+
+function tileHTML(t){
+ if(!t)return "";
+ return `<span class="tile ${COLORS[t.c]}">${t.fake||t.w?"★":t.n}</span>`;
+}
+
+function sortTiles(a){a.sort((x,y)=>x.c-y.c||x.n-y.n);}
+
+function newGame(){
+ deck=[];
+ for(let set=0;set<2;set++)
+  for(let c=0;c<4;c++)
+   for(let n=1;n<=13;n++)deck.push(tile(n,c));
+
+ deck.push(tile(0,0,false,true),tile(0,0,false,true));
+ shuffle(deck);
+
+ indicator=deck.pop();
+ wildNumber=indicator.n===13?1:indicator.n+1;
+ wildColor=indicator.c;
+
+ deck.forEach(t=>{
+  if(!t.fake&&t.n===wildNumber&&t.c===wildColor)t.w=true;
+ });
+
+ deck.filter(t=>t.fake).forEach(t=>{
+  t.n=indicator.n;
+  t.c=indicator.c;
+ });
+
+ hand=[];
+ bots=[[],[],[]];
+ discard=[];
+
+ for(let i=0;i<15;i++)hand.push(deck.pop());
+ bots.forEach(p=>{
+  for(let i=0;i<14;i++)p.push(deck.pop());
+ });
+ discard.push(deck.pop());
+
+ selected=-1;
+ drawn=false;
+ over=false;
+ firstTurn=true;
+ thinking=false;
+
+ sortTiles(hand);
+ render();
+ say("Oyun başladı. İlk taşını seç ve at!");
+}
+
+function say(s){
+ document.getElementById("status").textContent=s;
+}
+
+function render(){
+ document.getElementById("indicator").innerHTML=tileHTML(indicator);
+ document.getElementById("joker").innerHTML=tileHTML(tile(wildNumber,wildColor,true));
+ document.getElementById("discard").innerHTML=tileHTML(discard[discard.length-1]);
+ document.getElementById("stockCount").textContent="Taş havuzu: "+deck.length;
+
+ bots.forEach((p,i)=>{
+  document.getElementById("p"+i).textContent=p.length+" taş";
+
+  const rack=document.getElementById("rack"+i);
+  rack.innerHTML="";
+
+  p.forEach(()=>{
+   const t=document.createElement("span");
+   t.className="back-tile";
+   rack.appendChild(t);
+  });
+ });
+
+ const area=document.getElementById("hand");
+ area.innerHTML="";
+
+ hand.forEach((t,i)=>{
+  const el=document.createElement("span");
+  el.className="tile "+COLORS[t.c]+(selected===i?" selected":"");
+  el.textContent=t.fake||t.w?"★":t.n;
+
+  el.onclick=()=>{
+   if(over||thinking)return;
+   selected=selected===i?-1:i;
+   render();
+  };
+
+  area.appendChild(el);
+ });
+}
+
+function draw(){
+ if(over||thinking||drawn||hand.length!==14||firstTurn){
+  say("Şu anda taş çekemezsin.");
+  return;
+ }
+ if(!deck.length){
+  say("Taş havuzu boş!");
+  return;
+ }
+
+ hand.push(deck.pop());
+ drawn=true;
+ selected=-1;
+ sortTiles(hand);
+ render();
+ say("Taş çektin. Şimdi atmak istediğin taşı seç.");
+}
+
+function take(){
+ if(over||thinking||drawn||hand.length!==14||firstTurn){
+  say("Şu anda yerden taş alamazsın.");
+  return;
+ }
+ if(!discard.length)return;
+
+ hand.push(discard.pop());
+ drawn=true;
+ selected=-1;
+ sortTiles(hand);
+ render();
+ say("Yerden taşı aldın. Şimdi bir taş seç ve at.");
+}
+
+function tileValue(t,arr,index){
+ if(t.w)return 20;
+ let score=0;
+
+ for(let i=0;i<arr.length;i++){
+  if(i===index)continue;
   const x=arr[i];
-  if(x.w){score+=2;continue;}
+
+  if(x.w){
+   score+=2;
+   continue;
+  }
+
   if(x.n===t.n&&x.c!==t.c)score+=4;
+
   if(x.c===t.c){
    const gap=Math.abs(x.n-t.n);
    if(gap===1)score+=4;
@@ -160,18 +242,26 @@ button:last-child{
  }
  return score;
 }
+
 function chooseDiscard(p){
  let best=0,bestScore=Infinity;
+
  for(let i=0;i<p.length;i++){
   const score=tileValue(p[i],p,i);
-  if(score<bestScore){bestScore=score;best=i;}
+  if(score<bestScore){
+   bestScore=score;
+   best=i;
+  }
  }
  return best;
 }
+
 function aiDraw(p){
  if(!deck.length)return false;
- p.push(deck.pop());return true;
+ p.push(deck.pop());
+ return true;
 }
+       
 function aiTurn(){
  if(over)return;
  thinking=true;
@@ -183,37 +273,38 @@ function aiTurn(){
   discard.push(p.splice(idx,1)[0]);
   moves.push(names[i]+" taşlarını değerlendirdi");
  }
- render();thinking=false;
+ render();
+ thinking=false;
  say(moves.length?moves.join(" • ")+" • Sıra sende!":"Sıra sende!");
 }
+
 function throwTile(){
  if(over||thinking)return;
- if(!firstTurn&&!drawn){say("Önce taş çekmelisin.");return;}
- if(hand.length!==15){say("Atılacak taş bulunamadı.");return;}
- if(selected<0){say("Lütfen atmak istediğin taşı seç.");return;}
+ if(!firstTurn&&!drawn){
+  say("Önce taş çekmelisin.");
+  return;
+ }
+ if(hand.length!==15){
+  say("Atılacak taş bulunamadı.");
+  return;
+ }
+ if(selected<0){
+  say("Lütfen atmak istediğin taşı seç.");
+  return;
+ }
  discard.push(hand.splice(selected,1)[0]);
- selected=-1;drawn=false;firstTurn=false;
- render();say("Taşını attın. Rakipler düşünüyor...");
+ selected=-1;
+ drawn=false;
+ firstTurn=false;
+ render();
+ say("Taşını attın. Rakipler düşünüyor...");
  setTimeout(aiTurn,700);
 }
+
 newGame();
 </script>
 </body>
 </html>
-  <div class="opponents">
- <div class="player">
-  <strong>🤖 ALİ</strong>
-  <span id="p0">14 taş</span>
-  <div class="rack" id="rack0"></div>
- </div>
- <div class="player">
-  <strong>🤖 MEHMET</strong>
-  <span id="p1">14 taş</span>
-  <div class="rack" id="rack1"></div>
- </div>
- <div class="player">
-  <strong>🤖 HASAN</strong>
-  <span id="p2">14 taş</span>
-  <div class="rack" id="rack2"></div>
- </div>
-  </div>
+
+
+ 
