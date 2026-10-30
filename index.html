@@ -93,15 +93,37 @@ function shuffle(a){
  return a;
 }
 
-function tile(n,c,w=false,fake=false){return {n,c,w,fake};}
+function tile(n,c,w=false,fake=false){
 
-function tileHTML(t){
- if(!t)return "";
- return `<span class="tile ${COLORS[t.c]}">${t.fake||t.w?"★":t.n}</span>`;
+function tile(n,c,w=false,fake=false){
+ return {
+  n: Number(n),
+  c: Number(c),
+  w: Boolean(w),
+  fake: Boolean(fake)
+ };
 }
 
-function sortTiles(a){a.sort((x,y)=>x.c-y.c||x.n-y.n);}
+function tileHTML(t){
+ if(!t) return "";
 
+ const color = COLORS[t.c] || "black";
+
+ let value;
+
+ if(t.fake){
+  value = t.n;
+ } else if(t.w){
+  value = "OKEY";
+ } else {
+  value = t.n;
+ }
+
+ return `<span class="tile ${color}">${value}</span>`;
+}
+ 
+  
+function sortTiles(a){a.sort((x,y)=>x.c-y.c||x.n-y.n);}
 function newGame(){
  deck=[];
  for(let set=0;set<2;set++)
