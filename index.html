@@ -84,6 +84,7 @@ button:last-child{background:linear-gradient(145deg,#315b4b,#173b30);color:white
  <h3 class="section-title">🎴 SENİN ISTAKAN</h3>
  <div id="hand" class="hand"></div>
  <div class="controls">
+  <button onclick="open101()">🎯 101 AÇ</button>
   <button onclick="draw()">⬇ Taş Çek</button>
   <button onclick="take()">↗ Yerden Al</button>
   <button onclick="throwTile()">🀄 Taş At</button>
@@ -366,7 +367,10 @@ function aiTurn(){
  thinking=false;
  say(moves.length?moves.join(" • ")+" • Sıra sende!":"Sıra sende!");
 }
-
+function open101(){
+ say("101 açmak için geçerli perlerini seçmelisin. Per hesaplama sistemini hazırlıyoruz.");
+  }
+  
 function throwTile(){
  if(over||thinking)return;
 
