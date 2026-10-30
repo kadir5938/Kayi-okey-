@@ -149,9 +149,9 @@ function newGame(){
  });
 
  deck.filter(t=>t.fake).forEach(t=>{
-  t.n=indicator.n;
-  t.c=indicator.c;
- });
+  t.n=wildNumber;
+  t.c=wildColor;
+});
 
  hand=[];
  bots=[[],[],[]];
