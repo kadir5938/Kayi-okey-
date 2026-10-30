@@ -190,6 +190,7 @@ function sortTiles(a){a.sort((x,y)=>x.c-y.c||x.n-y.n);}
 
  sortTiles(hand);
  render();
+ console.log("YENİ OYUN SONRASI HAVUZ:",deck.length);
 
  say("Oyun başladı. Havuzda "+deck.length+" taş var.");
 }
