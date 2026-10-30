@@ -103,13 +103,14 @@ function tile(n,c,w=false,fake=false){
  };
 }
 
+
 function tileHTML(t){
  if(!t)return "";
 
  const color=COLORS[t.c] || "black";
-
  return `<span class="tile ${color}">${t.n}</span>`;
-}
+  }
+  
   
 function tileHTML(t){
  if(!t) return "";
