@@ -221,31 +221,36 @@ function render(){
    t.className="back-tile";
    rack.appendChild(t);
   });
+ });
 
  const area=document.getElementById("hand");
  area.innerHTML="";
-console.log("ISTAKA TAŞ SAYISI:",hand.length);
+
+ console.log("ISTAKA TAŞ SAYISI:",hand.length);
+
  hand.forEach((t,i)=>{
   const el=document.createElement("span");
+
   el.className="tile "+COLORS[t.c]+
-(selected===i||openingSelection.includes(i)?" selected":"");
+  (selected===i||openingSelection.includes(i)?" selected":"");
+
   el.textContent=t.n;
 
   el.onclick=()=>{
- if(over||thinking)return;
+   if(over||thinking)return;
 
- if(openingSelection.includes(i)){
-  openingSelection=openingSelection.filter(x=>x!==i);
- }else{
-  openingSelection.push(i);
- }
+   if(openingSelection.includes(i)){
+    openingSelection=openingSelection.filter(x=>x!==i);
+   }else{
+    openingSelection.push(i);
+   }
 
- selected=i;
- render();
-};
+   selected=i;
+   render();
+  };
 
-area.appendChild(el);
-});
+  area.appendChild(el);
+ });
 }
 
 function draw(){
