@@ -170,10 +170,7 @@ function say(s){
 
 function render(){
  document.getElementById("indicator").innerHTML=tileHTML(indicator);
- document.getElementById("joker").innerHTML=tileHTML({
- n:wildNumber,
- c:wildColor
-});
+ document.getElementById("joker").innerHTML='<span class="tile '+COLORS[wildColor]+'">★</span>';
 }); class="tile '+COLORS[wildColor]+'">★</span>';;
  document.getElementById("discard").innerHTML=tileHTML(discard[discard.length-1]);
  document.getElementById("stockCount").textContent="Taş havuzu: "+deck.length;
