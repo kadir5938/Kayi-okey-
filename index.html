@@ -105,14 +105,6 @@ function tile(n,c,w=false,fake=false){
 
 
 function tileHTML(t){
- if(!t)return "";
-
- const color=COLORS[t.c] || "black";
- return `<span class="tile ${color}">${t.n}</span>`;
-  }
-  
-  
-function tileHTML(t){
  if(!t) return "";
 
  const color = COLORS[t.c] || "black";
@@ -122,14 +114,13 @@ function tileHTML(t){
  if(t.fake){
   value = t.n;
  } else if(t.w){
-  value = "OKEY";
+  value = "★";
  } else {
   value = t.n;
  }
 
  return `<span class="tile ${color}">${value}</span>`;
-}
- 
+   }
   
 function sortTiles(a){a.sort((x,y)=>x.c-y.c||x.n-y.n);}
 function newGame(){
