@@ -99,7 +99,8 @@ button:last-child{background:linear-gradient(145deg,#315b4b,#173b30);color:white
 const COLORS=["red","blue","black","yellow"];
 let deck=[],hand=[],bots=[],discard=[];
 let indicator,selected=-1,drawn=false,over=false,firstTurn=true;
-let wildNumber=0,wildColor=0,thinking=false;
+let openingSelection=[];
+  let wildNumber=0,wildColor=0,thinking=false;
 
 function shuffle(a){
  for(let i=a.length-1;i>0;i--){
@@ -230,14 +231,22 @@ console.log("ISTAKA TAŞ SAYISI:",hand.length);
  hand.forEach((t,i)=>{
   const el=document.createElement("span");
   el.className="tile "+COLORS[t.c]+
-  (selected===i?" selected":"");
+(selected===i||openingSelection.includes(i)?" selected":"");
   el.textContent=t.n;
 
   el.onclick=()=>{
-   if(over||thinking)return;
-   selected=selected===i?-1:i;
-   render();
-  };
+ if(over||thinking)return;
+
+ selected=selected===i?-1:i;
+
+ if(openingSelection.includes(i)){
+  openingSelection=openingSelection.filter(x=>x!==i);
+ }else{
+  openingSelection.push(i);
+ }
+
+ render();
+};
 
   area.appendChild(el);
  });
