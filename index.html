@@ -253,7 +253,42 @@ function take(){
  render();
  say("Yerden taşı aldın. Şimdi bir taş seç ve at.");
 }
+function tilePoints(t){
+ return t.n;
+}
 
+function isValidGroup(group){
+ if(group.length<3 || group.length>4)return false;
+
+ let normal=group.filter(t=>!t.w&&!t.fake);
+
+ if(normal.length<2)return false;
+
+ let sameColor=normal.every(t=>t.c===normal[0].c);
+ let sameNumber=normal.every(t=>t.n===normal[0].n);
+
+ if(sameColor){
+  let nums=normal.map(t=>t.n).sort((a,b)=>a-b);
+  let gaps=0;
+
+  for(let i=1;i<nums.length;i++){
+   gaps+=nums[i]-nums[i-1]-1;
+  }
+
+  return gaps<=group.length-normal.length;
+ }
+
+ if(sameNumber){
+  let colors=new Set(normal.map(t=>t.c));
+  return colors.size===normal.length;
+ }
+
+ return false;
+}
+
+function groupPoints(group){
+ return group.reduce((sum,t)=>sum+tilePoints(t),0);
+}
 function tileValue(t,arr,index){
  if(t.w)return 20;
  let score=0;
