@@ -177,12 +177,13 @@ function say(s){
  document.getElementById("status").textContent=s;
 }
 
-document.getElementById("indicator").innerHTML=tileHTML(indicator);
+function render(){
+ document.getElementById("indicator").innerHTML=tileHTML(indicator);
 
-document.getElementById("joker").innerHTML=
+ document.getElementById("joker").innerHTML=
  tileHTML({n:wildNumber,c:wildColor});
 
-document.getElementById("discard").innerHTML=
+ document.getElementById("discard").innerHTML=
  tileHTML(discard[discard.length-1]);
 
  document.getElementById("stockCount").textContent=
@@ -216,9 +217,9 @@ document.getElementById("discard").innerHTML=
    render();
   };
 
-    area.appendChild(el);
+  area.appendChild(el);
  });
-}
+  }
 
 function draw(){
 
