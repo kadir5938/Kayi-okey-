@@ -294,60 +294,21 @@ if(over||thinking||drawn||hand.length!==21||firstTurn){
 function tilePoints(t){
  
 
-function isValidGroup(group){
- if(!Array.isArray(group))return false;
-
- const len=group.length;
- if(len<3 || len>13)return false;
-
- const normal=group.filter(t=>!t.w && !t.fake);
- const jokers=len-normal.length;
-
- if(normal.length===0)return false;
-
- // SIRALI PER
- let sequence=false;
-
- if(normal.every(t=>t.c===normal[0].c)){
-  const nums=normal.map(t=>Number(t.n)).sort((a,b)=>a-b);
-
-  if(new Set(nums).size===nums.length){
-   const missing=nums[nums.length-1]-nums[0]+1-normal.length;
-   const extra=jokers-missing;
-
-   const available=(nums[0]-1)+(13-nums[nums.length-1]);
-
-   sequence=missing>=0 &&
-            extra>=0 &&
-            extra<=available;
-  }
- }
-
- // AYNI SAYI PERİ
- let set=false;
-
- if(len<=4 && normal.every(t=>Number(t.n)===Number(normal[0].n))){
-  const colors=new Set(normal.map(t=>t.c));
-
-  set=colors.size===normal.length &&
-      jokers<=4-normal.length;
- }
-
- return sequence || set;
+function tilePoints(t){
+ return Number(t.n)||0;
 }
 
 function isValidGroup(group){
  if(!Array.isArray(group))return false;
 
  const len=group.length;
- if(len<3 || len>13)return false;
+ if(len<3||len>13)return false;
 
  const normal=group.filter(t=>!t.w&&!t.fake);
  const jokers=len-normal.length;
 
  if(normal.length===0)return false;
 
- // SIRALI PER: Aynı renk, farklı sayılar
  let sequence=false;
 
  if(normal.every(t=>t.c===normal[0].c)){
@@ -358,20 +319,43 @@ function isValidGroup(group){
    const extra=jokers-missing;
    const available=(nums[0]-1)+(13-nums[nums.length-1]);
 
-   sequence=missing>=0 && extra>=0 && extra<=available;
+   sequence=missing>=0&&extra>=0&&extra<=available;
   }
  }
 
- // AYNI SAYI: Farklı renkler
  let set=false;
 
- if(len<=4 && normal.every(t=>t.n===normal[0].n)){
+ if(len<=4&&normal.every(t=>Number(t.n)===Number(normal[0].n))){
   const colors=new Set(normal.map(t=>t.c));
-  set=colors.size===normal.length &&
-      jokers<=4-normal.length;
+  set=colors.size===normal.length&&jokers<=4-normal.length;
  }
 
- return sequence || set;
+ return sequence||set;
+}
+
+function tileValue(t,p,i){
+ let score=Number(t.n);
+
+ if(t.w)return 1000;
+
+ for(let j=0;j<p.length;j++){
+  if(i===j)continue;
+
+  const x=p[j];
+
+  if(x.w)continue;
+
+  if(x.n===t.n&&x.c!==t.c)score+=4;
+
+  if(x.c===t.c){
+   const gap=Math.abs(x.n-t.n);
+
+   if(gap===1)score+=4;
+   else if(gap===2)score+=1.5;
+  }
+ }
+
+ return score;
 }
  
 function chooseDiscard(p){
