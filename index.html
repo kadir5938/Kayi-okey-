@@ -91,7 +91,7 @@ button:last-child{background:linear-gradient(145deg,#315b4b,#173b30);color:white
   <button onclick="newGame()">🔄 Yeni Oyun</button>
  </div>
  <div class="footer">KAYI OKEY © 2026<br>İyi eğlenceler!</div>
-</main>
+\u003Cdiv class=\"rack\" id=\"rack1\">\u003C/div></main>
  <script>
 const COLORS=["red","blue","black","yellow"];
 let deck=[],hand=[],bots=[],discard=[];
@@ -385,9 +385,6 @@ function aiTurn(){
  say(moves.length?moves.join(" • ")+" • Sıra sende!":"Sıra sende!");
 }
 function validGroup(group){
- if(group.length<3)return false;
-
-  function validGroup(group){
  if(group.length<3 || group.length>13)return false;
  if(group.some(t=>t.w))return false;
 
