@@ -381,9 +381,91 @@ function aiTurn(){
  thinking=false;
  say(moves.length?moves.join(" • ")+" • Sıra sende!":"Sıra sende!");
 }
-function open101(){
- say("101 açmak için geçerli perlerini seçmelisin. Per hesaplama sistemini hazırlıyoruz.");
+function validGroup(group){
+ if(group.length<3)return false;
+
+ let numbers=group.map(t=>t.n);
+ let colors=group.map(t=>t.c);
+
+ if(group.some(t=>t.w))return false;
+
+ let sameNumber=numbers.every(n=>n===numbers[0]);
+ let differentColors=new Set(colors).size===colors.length;
+
+ if(sameNumber && differentColors)return true;
+
+ let sameColor=colors.every(c=>c===colors[0]);
+ let sorted=[...numbers].sort((a,b)=>a-b);
+
+ if(sameColor){
+  for(let i=1;i<sorted.length;i++){
+   if(sorted[i]!==sorted[i-1]+1)return false;
   }
+  return true;
+ }
+
+ return false;
+}
+ function open101(){
+ const tiles=openingSelection.map(i=>hand[i]);
+
+ if(tiles.length<6){
+  say("101 açmak için en az iki geçerli per seçmelisin.");
+  return;
+ }
+
+ if(tiles.some(t=>!t || t.w)){
+  say("Şimdilik jokerli açılış desteklenmiyor.");
+  return;
+ }
+
+ let total=tiles.reduce((sum,t)=>sum+t.n,0);
+
+ if(total<101){
+  say("Seçilen taşların toplamı "+total+". En az 101 olmalı.");
+  return;
+ }
+
+ function canSplit(list){
+  if(list.length===0)return true;
+  if(list.length<3)return false;
+
+  let first=list[0];
+
+  function search(start,group,rest){
+   if(group.length>=3 && validGroup(group)){
+    if(canSplit(rest))return true;
+   }
+
+   for(let i=start;i<list.length;i++){
+    search(i+1,[...group,list[i]],rest);
+    if(group.length>=3 && validGroup(group)){
+     const next=[...rest,list[i]];
+     if(canSplit(next))return true;
+    }
+   }
+   return false;
+  }
+
+  return false;
+ }
+
+ say("101 açılış kontrolü hazırlanıyor.");
+ }
+ });
+
+ if(openingSelection.length<3){
+  say("101 açmak için en az 3 taş seçmelisin.");
+  return;
+ }
+
+ if(total<101){
+  say("Seçtiğin taşların toplamı "+total+". En az 101 olmalı.");
+  return;
+ }
+
+ say("Taş toplamın "+total+". Şimdi per geçerliliğini kontrol edeceğiz.");
+}
   
 function throwTile(){
  if(over||thinking)return;
@@ -398,8 +480,7 @@ function throwTile(){
   return;
  }
 
- if(hand.length!==15 && hand.length!==22){
-  say("Taş sayısı hatalı!");
+ if(hand.length!==21 && hand.length!==22){
   return;
  }
 
