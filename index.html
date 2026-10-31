@@ -387,42 +387,44 @@ function aiTurn(){
  thinking=false;
  say(moves.length?moves.join(" • ")+" • Sıra sende!":"Sıra sende!");
 }
-function validGroup(group){
- if(group.length<3 || group.length>13)return false;
 
- const wild=group.filter(t=>t.w);
- const normal=group.filter(t=>!t.w);
+function isValidGroup(group){
+ if(!Array.isArray(group))return false;
+ if(group.length<3 || group.length>4)return false;
 
- if(normal.length<2)return false;
+ let normal=group.filter(t=>!t.w&&!t.fake);
+ let jokers=group.length-normal.length;
 
- const sameNumber=normal.every(t=>t.n===normal[0].n);
- const colors=new Set(normal.map(t=>t.c));
-
- // Aynı sayı, farklı renk
- if(sameNumber && colors.size===normal.length){
-  return group.length<=4 &&
-   group.length-normal.length<=4-colors.size;
- }
+ if(normal.length<1)return false;
 
  // Aynı renk, sıralı sayılar
- const sameColor=normal.every(t=>t.c===normal[0].c);
+ let sameColor=normal.every(t=>t.c===normal[0].c);
 
  if(sameColor){
-  const nums=normal.map(t=>t.n).sort((a,b)=>a-b);
+  let nums=normal.map(t=>t.n).sort((a,b)=>a-b);
 
   if(new Set(nums).size!==nums.length)return false;
 
-  let missing=0;
+  let needed=0;
 
   for(let i=1;i<nums.length;i++){
-   missing+=nums[i]-nums[i-1]-1;
+   needed+=nums[i]-nums[i-1]-1;
   }
 
-  return missing<=wild.length && group.length<=13;
+  return needed<=jokers;
+ }
+
+ // Aynı sayı, farklı renkler
+ let sameNumber=normal.every(t=>t.n===normal[0].n);
+
+ if(sameNumber){
+  let colors=new Set(normal.map(t=>t.c));
+  return colors.size===normal.length;
  }
 
  return false;
 }
+  
 
 function canMakeMelds(tiles){
  if(tiles.length===0)return true;
