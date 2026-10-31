@@ -206,14 +206,19 @@ console.log("DESTE OLUŞTURULUYOR");
 openingSelection=[];
 openedMelds=[];
 drawn=false;
-
+firstTurn=true;
+over=false;
+thinking=false;
  sortTiles(hand);
  render();
    console.log("DESTE:",deck.length);
 console.log("ISTAKA:",hand.length);
    
  console.log("YENİ OYUN SONRASI HAVUZ:",deck.length);
-
+console.log("GÖSTERGE:",indicator);
+console.log("ISTAKA TAŞ SAYISI:",hand.length);
+console.log("RAKİP TAŞ SAYILARI:",bots.map(p=>p.length));
+console.log("SON HAVUZ:",deck.length);
  say("Oyun başladı. Havuzda "+deck.length+" taş var.");
 }
 
@@ -292,7 +297,7 @@ function render(){
    
 
 function draw(){
- if(over||thinking||drawn||hand.length!==21){
+ if(over||thinking||drawn||hand.length!==22){
   say("Şu anda taş çekemezsin.");
   return;
  }
