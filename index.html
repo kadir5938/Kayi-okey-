@@ -220,6 +220,10 @@ function say(s){
 }
 
 function render(){
+ console.log("RENDER ÇALIŞTI");
+console.log("DESTE SAYISI:",deck.length);
+console.log("ELDEKİ TAŞ:",hand.length);
+console.log("RAKİPLER:",bots.map(p=>p.length));
  document.getElementById("indicator").innerHTML=tileHTML(indicator);
 
  document.getElementById("joker").innerHTML=
