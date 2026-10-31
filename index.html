@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -6,203 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#071d19">
 <title>Kayı Okey</title>
-
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;
- background:radial-gradient(circle at top,#174d3d,#061b17 75%);
- color:white;
- font-family:Arial,sans-serif;
- text-align:center;
- min-height:100vh;
-}
-header{
- padding:17px 10px;
- background:#071d19;
- border-bottom:2px solid #d9b65c;
-}
-.logo{
- font-size:29px;
- font-weight:900;
- color:#f4d47e;
- letter-spacing:3px;
-}
-.subtitle{
- font-size:10px;
- letter-spacing:2px;
- color:#b9c9bd;
- margin-top:6px;
-}
-main{max-width:760px;margin:auto;padding:12px}
-.scorebar{
- display:flex;
- justify-content:space-between;
- background:#102e25;
- border:1px solid #9b8045;
- border-radius:12px;
- padding:12px 14px;
- font-size:13px;
-}
-.table{
- margin-top:14px;
- padding:17px 8px;
- min-height:390px;
- border:9px solid #674322;
- border-radius:35px;
- background:radial-gradient(ellipse at center,#27825a,#07513c 75%);
- display:flex;
- flex-direction:column;
- justify-content:space-between;
-}
-.opponents{display:flex;justify-content:space-around;gap:6px}
-.player{
- flex:1;
- min-width:0;
- max-width:160px;
- padding:10px 3px;
- background:linear-gradient(145deg,#123c30,#08271f);
- border:1px solid #c5a65b;
- border-radius:13px;
- font-size:12px;
-}
-.player strong{
- display:block;
- color:#f4d47e;
- margin-bottom:6px;
-}
-.rack{
- display:flex;
- justify-content:center;
- align-items:center;
- flex-wrap:nowrap;
- gap:1px;
- margin-top:9px;
- min-height:29px;
- padding:4px 2px;
- background:#061e18;
- border-radius:5px;
- overflow:hidden;
-}
-.back-tile{
- width:7px;
- height:23px;
- flex:0 0 7px;
- border:1px solid #e0c477;
- border-radius:3px;
- background:repeating-linear-gradient(45deg,#174b86,#174b86 3px,#2869a5 3px,#2869a5 6px);
-}
-.middle{
- display:flex;
- justify-content:center;
- align-items:center;
- flex-wrap:wrap;
- gap:13px;
- padding:20px 0;
-}
-.pile{
- min-width:77px;
- padding:9px 5px;
- background:#063d2d88;
- border:1px solid #ffffff25;
- border-radius:12px;
- font-size:10px;
- color:#f5dfaa;
-}
-.tile{
- width:36px;
- height:52px;
- display:inline-flex;
- align-items:center;
- justify-content:center;
- background:linear-gradient(135deg,#fff,#e9e5d8);
- border:1px solid #bdb8a8;
- border-radius:6px;
- box-shadow:0 3px 5px #0006;
- font-size:23px;
- font-weight:900;
- margin:2px;
- cursor:pointer;
- user-select:none;
- color:#222;
-}
-.red{color:#e32636}
-.blue{color:#1768c7}
-.black{color:#222}
-.yellow{color:#c28b00}
-.selected{
- transform:translateY(-10px);
- border:3px solid #f4c95d;
-}
-#status{
- padding:13px;
- margin:12px 0;
- min-height:46px;
- color:#ffe7a6;
- background:#082b21;
- border:1px solid #9b8045;
- border-radius:11px;
- font-size:13px;
- line-height:1.5;
-}
-.section-title{
- color:#f4d47e;
- font-size:16px;
- margin:22px 0 10px;
-}
-.hand{
- min-height:94px;
- padding:13px 4px;
- display:flex;
- justify-content:center;
- align-items:center;
- flex-wrap:wrap;
- gap:1px;
- background:linear-gradient(145deg,#102f25,#071f19);
- border:1px solid #b49c5e;
- border-radius:14px;
-}
-.controls{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:9px;
- margin-top:15px;
-}
-button{
- padding:14px 8px;
- border:1px solid #ffe5a0;
- border-radius:10px;
- background:linear-gradient(145deg,#f8dc8c,#c99c3d);
- color:#282318;
- font-weight:900;
- font-size:14px;
- cursor:pointer;
-}
-button:last-child{
- background:linear-gradient(145deg,#315b4b,#173b30);
- color:white;
- border-color:#7ba58e;
-}
-.footer{
- padding:22px 5px;
- color:#9bb7a8;
- font-size:11px;
-}
-@media(max-width:400px){
- .tile{width:29px;height:43px;font-size:18px;margin:1px}
- .table{min-height:350px;padding:12px 5px}
- .player{font-size:10px;padding:9px 2px}
- .back-tile{width:6px;flex-basis:6px;height:20px}
- button{padding:13px 5px;font-size:12px}
- .logo{font-size:25px}
-}
+body{margin:0;background:radial-gradient(circle at top,#245b43,#061b16 75%);color:white;font-family:Arial,sans-serif;text-align:center}
+header{padding:16px;background:#071d19;border-bottom:3px solid #d9b65c}
+.logo{font-size:28px;font-weight:bold;color:#f4d47e;letter-spacing:3px}
+.subtitle{font-size:10px;letter-spacing:2px;color:#b9c9bd;margin-top:5px}
+main{max-width:900px;margin:auto;padding:10px}
+.scorebar{display:flex;justify-content:space-between;background:#102e25;border:1px solid #9b8045;border-radius:12px;padding:11px;font-size:13px}
+.table{margin-top:12px;padding:12px 5px;min-height:430px;border:8px solid #684326;border-radius:25px;background:radial-gradient(ellipse at center,#329365,#12603e 65%,#08432e);display:flex;flex-direction:column;justify-content:space-between}
+.opponents{display:flex;justify-content:space-around;gap:5px}
+.player{flex:1;min-width:0;max-width:190px;padding:7px 2px;background:#102c20;border:2px solid #b58c48;border-radius:10px;font-size:11px}
+.player strong{display:block;color:#f4d47e;margin-bottom:5px}
+.rack{min-height:30px;display:flex;justify-content:center;align-items:center;gap:2px;padding:4px;background:#54331d;border:2px solid #b58a4c;border-radius:5px;overflow:hidden}
+.back-tile{height:22px;flex:1;max-width:7px;min-width:2px;border:1px solid #e8ce8c;border-radius:2px;background:repeating-linear-gradient(45deg,#174b86,#174b86 3px,#2869a5 3px,#2869a5 6px)}
+.middle{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:9px;padding:15px 0}
+.pile{min-width:78px;padding:8px 4px;background:#063d2d99;border:1px solid #d9c28c66;border-radius:10px;font-size:10px;color:#f5dfaa}
+.pile .tile{margin-top:6px}
+.tile{width:32px;height:46px;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#fff,#e9e5d8);border:1px solid #bdb8a8;border-radius:6px;box-shadow:0 3px 5px #0006;font-size:20px;font-weight:bold;margin:2px;cursor:pointer;color:#222;user-select:none}
+.red{color:#e32636}.blue{color:#1768c7}.black{color:#222}.yellow{color:#c28b00}
+.selected{transform:translateY(-8px);border:3px solid #f4c95d}
+.section-title{color:#f4d47e;font-size:13px;margin:13px 0 7px;font-weight:bold}
+.hand{min-height:70px;padding:8px 3px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:1px;background:linear-gradient(145deg,#744923,#442916);border:3px solid #c49b59;border-radius:10px}
+#openedMelds{background:#0b563b;border:1px solid #c49b59;gap:8px}
+.meld{display:flex;flex-wrap:wrap;justify-content:center;padding:3px;border-bottom:1px solid #d5bc7c55}
+#status{padding:11px;margin:10px 0;min-height:42px;color:#ffe7a6;background:#082b21;border:1px solid #9b8045;border-radius:10px;font-size:13px;line-height:1.4}
+.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+button{padding:12px 5px;border:1px solid #ffe5a0;border-radius:9px;background:linear-gradient(145deg,#f8dc8c,#c99c3d);color:#282318;font-weight:bold;font-size:12px;cursor:pointer}
+button.secondary{background:linear-gradient(145deg,#315b4b,#173b30);color:white;border-color:#7ba58e}
+button:disabled{opacity:.4}
+.note{font-size:11px;color:#d8e6dc;line-height:1.5;margin-top:10px}
+.footer{padding:16px;color:#b2c8b9;font-size:11px}
+@media(max-width:450px){main{padding:6px}.logo{font-size:24px}.table{min-height:410px;padding:9px 2px;border-width:6px}.player{font-size:10px}.tile{width:28px;height:41px;font-size:18px;margin:1px}.pile{min-width:68px}button{font-size:11px;padding:12px 3px}}
 </style>
 </head>
-
 <body>
 <header>
  <div class="logo">🀄 KAYI OKEY</div>
- <div class="subtitle">101 OKEY • AKILLI RAKİPLER</div>
+ <div class="subtitle">101 OKEY • OKEY MASASI</div>
 </header>
 
 <main>
@@ -213,21 +53,9 @@ button:last-child{
 
  <section class="table">
   <div class="opponents">
-   <div class="player">
-    <strong>🤖 ALİ</strong>
-    <span id="p0">21 taş</span>
-    <div class="rack" id="rack0"></div>
-   </div>
-   <div class="player">
-    <strong>🤖 MEHMET</strong>
-    <span id="p1">21 taş</span>
-    <div class="rack" id="rack1"></div>
-   </div>
-   <div class="player">
-    <strong>🤖 HASAN</strong>
-    <span id="p2">21 taş</span>
-    <div class="rack" id="rack2"></div>
-   </div>
+   <div class="player"><strong>🤖 ALİ</strong><span id="p0">21 taş</span><div class="rack" id="rack0"></div></div>
+   <div class="player"><strong>🤖 MEHMET</strong><span id="p1">21 taş</span><div class="rack" id="rack1"></div></div>
+   <div class="player"><strong>🤖 HASAN</strong><span id="p2">21 taş</span><div class="rack" id="rack2"></div></div>
   </div>
 
   <div class="middle">
@@ -239,383 +67,473 @@ button:last-child{
   <div class="section-title">🎯 MASAYA AÇILAN PERLER</div>
   <div id="openedMelds" class="hand"></div>
 
-  <div id="status">Kayı Okey'e hoş geldin!</div>
+  <div id="status">Yeni oyun başlatılıyor...</div>
 
   <div class="section-title">🀄 SENİN ISTAKAN</div>
   <div id="hand" class="hand"></div>
-
-  <div class="controls">
-   <button onclick="open101()">🎯 101 AÇ</button>
-   <button onclick="draw()">⬇ Taş Çek</button>
-   <button onclick="take()">↗ Yerden Al</button>
-   <button onclick="throwTile()">🀄 Taş At</button>
-   <button onclick="newGame()">🔄 Yeni Oyun</button>
-  </div>
-
-  <div class="footer">KAYI OKEY © 2026<br>İyi eğlenceler!</div>
  </section>
+
+ <div class="controls">
+  <button onclick="open101()">🎯 SERİ AÇ (101)</button>
+  <button onclick="openPairs()">🀄 ÇİFT AÇ (5 ÇİFT)</button>
+  <button class="secondary" onclick="autoArrangePairs()">✨ ÇİFTLERİ OTOMATİK DİZ</button>
+  <button class="secondary" onclick="sortHand()">🔃 TAŞLARI SIRALA</button>
+  <button onclick="draw()">⬇ TAŞ ÇEK</button>
+  <button onclick="take()">↗ YERDEN AL</button>
+  <button onclick="throwTile()">🀄 TAŞ AT</button>
+  <button class="secondary" onclick="newGame()">🔄 YENİ OYUN</button>
+ </div>
+
+ <div class="note">
+  Taş çekmek için havuzdan taş çek veya yerdeki son taşı al.
+  Ardından atmak istediğin taşı seçip TAŞ AT düğmesine bas.
+ </div>
+ <div class="footer">KAYI OKEY • 101 OKEY MASASI</div>
 </main>
 
 <script>
 "use strict";
 
 const COLORS=["red","blue","black","yellow"];
+const COLOR_NAMES={red:"Kırmızı",blue:"Mavi",black:"Siyah",yellow:"Sarı"};
 
-let deck=[],hand=[],bots=[],discard=[];
-let openedMelds=[];
-let indicator;
-let selected=-1;
+let deck=[];
+let hand=[];
+let bots=[];
+let discard=[];
+let indicator=null;
+let wildNumber=0;
+let wildColor="";
+let selected=[];
 let drawn=false;
-let over=false;
-let firstTurn=true;
-let openingSelection=[];
-let wildNumber=0,wildColor=0;
-let thinking=false;
-let hasOpened=false;
+let opened=false;
+let pairsOpened=false;
+let gameOver=false;
+let turnBusy=false;
+let openedGroups=[];
 
-function tile(n,c,w=false,fake=false){
- return {n:Number(n),c:Number(c),w:Boolean(w),fake:Boolean(fake)};
+function makeTile(n,c,fake=false){
+ return {n,c,fake,w:false,id:Math.random().toString(36).slice(2)};
+}
+
+function createDeck(){
+ let d=[];
+ for(let c of COLORS){
+  for(let n=1;n<=13;n++){
+   d.push(makeTile(n,c));
+   d.push(makeTile(n,c));
+  }
+ }
+ d.push(makeTile(0,"fake",true));
+ d.push(makeTile(0,"fake",true));
+ return d;
 }
 
 function shuffle(a){
  for(let i=a.length-1;i>0;i--){
-  const j=Math.floor(Math.random()*(i+1));
+  let j=Math.floor(Math.random()*(i+1));
   [a[i],a[j]]=[a[j],a[i]];
  }
  return a;
 }
 
-function sortTiles(a){
- a.sort((x,y)=>x.c-y.c||x.n-y.n);
-}
-
-function say(s){
- document.getElementById("status").textContent=s;
-}
-
-function tileHTML(t){
- if(!t)return "";
- const value=t.fake?"★":t.n;
- return `<span class="tile ${COLORS[t.c]}">${value}</span>`;
+function nextNumber(n){
+ return n===13?1:n+1;
 }
 
 function newGame(){
- deck=[];
+ deck=shuffle(createDeck());
+ hand=[];
+ bots=[[],[],[]];
+ discard=[];
+ selected=[];
+ drawn=false;
+ opened=false;
+ pairsOpened=false;
+ gameOver=false;
+ turnBusy=false;
+ openedGroups=[];
 
- for(let set=0;set<2;set++){
-  for(let c=0;c<4;c++){
-   for(let n=1;n<=13;n++){
-    deck.push(tile(n,c));
-   }
-  }
- }
+ let index=deck.findIndex(t=>!t.fake);
+ indicator=deck.splice(index,1)[0];
 
- deck.push(tile(0,0,false,true));
- deck.push(tile(0,0,false,true));
-
- shuffle(deck);
-
- const idx=deck.findIndex(t=>!t.fake);
- indicator=deck.splice(idx,1)[0];
-
- wildNumber=indicator.n===13?1:indicator.n+1;
+ wildNumber=nextNumber(indicator.n);
  wildColor=indicator.c;
 
- deck.forEach(t=>{
-  if(!t.fake&&t.n===wildNumber&&t.c===wildColor){
+ for(let t of deck){
+  if(!t.fake && t.n===wildNumber && t.c===wildColor){
    t.w=true;
   }
   if(t.fake){
    t.n=indicator.n;
    t.c=indicator.c;
   }
- });
+ }
 
- hand=[];
- bots=[[],[],[]];
- discard=[];
- openedMelds=[];
+ hand=deck.splice(0,22);
 
- for(let i=0;i<22;i++)hand.push(deck.pop());
-
- bots.forEach(p=>{
-  for(let i=0;i<21;i++)p.push(deck.pop());
- });
+ for(let i=0;i<3;i++){
+  bots[i]=deck.splice(0,21);
+ }
 
  discard.push(deck.pop());
 
- selected=-1;
- openingSelection=[];
- drawn=false;
- firstTurn=true;
- over=false;
- thinking=false;
- hasOpened=false;
-
- sortTiles(hand);
+ sortHand();
  render();
+ message("Yeni oyun başladı. İlk olarak bir taş çek veya yerdeki taşı al.");
+}
 
- say("Oyun başladı! Havuzda "+deck.length+" taş var.");
- console.log("Dağıtım:",{
-  havuz:deck.length,
-  oyuncu:hand.length,
-  rakipler:bots.map(p=>p.length),
-  toplam:deck.length+hand.length+bots.reduce((s,p)=>s+p.length,0)+1+1
- });
+function tileHTML(t,clickable=false,index=-1){
+ if(!t)return "";
+ let label=t.fake?"★":t.w?"★":t.n;
+ let color=t.fake?"black":t.c;
+ let cls=t.w||t.fake?"black":color;
+ let chosen=selected.includes(index)?" selected":"";
+ return `<div class="tile ${cls}${chosen}" ${clickable?`onclick="selectTile(${index})"`:""}>${label}</div>`;
 }
 
 function render(){
  document.getElementById("indicator").innerHTML=tileHTML(indicator);
  document.getElementById("joker").innerHTML=
- tileHTML({n:wildNumber,c:wildColor});
+  tileHTML({n:wildNumber,c:wildColor,w:true});
  document.getElementById("discard").innerHTML=
- tileHTML(discard[discard.length-1]);
+  discard.length?tileHTML(discard[discard.length-1]):"-";
 
  document.getElementById("stockCount").textContent=
- "Taş havuzu: "+deck.length;
+  "Taş havuzu: "+deck.length;
 
- bots.forEach((p,i)=>{
-  document.getElementById("p"+i).textContent=p.length+" taş";
-  const rack=document.getElementById("rack"+i);
-  rack.innerHTML="";
-  p.forEach(()=>{
-   const t=document.createElement("span");
-   t.className="back-tile";
-   rack.appendChild(t);
-  });
+ for(let i=0;i<3;i++){
+  document.getElementById("p"+i).textContent=bots[i].length+" taş";
+  document.getElementById("rack"+i).innerHTML=
+   bots[i].map(()=>'<span class="back-tile"></span>').join("");
+ }
+
+ document.getElementById("hand").innerHTML=
+  hand.map((t,i)=>tileHTML(t,true,i)).join("");
+
+ document.getElementById("openedMelds").innerHTML=
+  openedGroups.map(g=>`<div class="meld">${g.map(t=>tileHTML(t)).join("")}</div>`).join("");
+
+ document.getElementById("open101Btn").disabled=opened||gameOver;
+ document.getElementById("openPairsBtn").disabled=pairsOpened||opened||gameOver;
+}
+
+function message(s){
+ document.getElementById("status").textContent=s;
+}
+
+function selectTile(i){
+ if(gameOver)return;
+ if(selected.includes(i)){
+  selected=selected.filter(x=>x!==i);
+ }else{
+  selected.push(i);
+ }
+ render();
+}
+
+function sortHand(){
+ hand.sort((a,b)=>{
+  let ca=COLORS.indexOf(a.c),cb=COLORS.indexOf(b.c);
+  if(ca!==cb)return ca-cb;
+  return a.n-b.n;
  });
-
- const opened=document.getElementById("openedMelds");
- opened.innerHTML="";
- openedMelds.forEach(meld=>{
-  const group=document.createElement("div");
-  group.style.display="flex";
-  group.style.flexWrap="wrap";
-  group.innerHTML=meld.map(tileHTML).join("");
-  opened.appendChild(group);
- });
-
- const area=document.getElementById("hand");
- area.innerHTML="";
-
- hand.forEach((t,i)=>{
-  const el=document.createElement("span");
-  el.className="tile "+COLORS[t.c]+
-   (selected===i||openingSelection.includes(i)?" selected":"");
-  el.textContent=t.w?"★":t.n;
-  el.onclick=()=>{
-   if(over||thinking)return;
-   if(openingSelection.includes(i)){
-    openingSelection=openingSelection.filter(x=>x!==i);
-   }else{
-    openingSelection.push(i);
-   }
-   selected=i;
-   render();
-  };
-  area.appendChild(el);
- });
+ selected=[];
+ render();
 }
 
 function draw(){
- if(over||thinking||firstTurn||drawn||hand.length!==21){
-  say("Şu anda taş çekemezsin.");
+ if(gameOver||drawn)return;
+ if(deck.length===0){
+  message("Taş havuzu bitti.");
   return;
  }
- if(!deck.length){
-  say("Taş havuzu boş!");
-  return;
- }
- hand.push(deck.pop());
+ let t=deck.pop();
+ hand.push(t);
  drawn=true;
- selected=-1;
- sortTiles(hand);
+ selected=[];
  render();
- say("Taş çektin. Şimdi taş at.");
+ message("Taş çektin. Şimdi atmak için bir taş seç.");
 }
 
 function take(){
- if(over||thinking||firstTurn||drawn||hand.length!==21){
-  say("Şu anda yerden taş alamazsın.");
+ if(gameOver||drawn)return;
+ if(discard.length===0){
+  message("Yerde alınacak taş yok.");
   return;
  }
- if(!discard.length)return;
-
  hand.push(discard.pop());
  drawn=true;
- selected=-1;
- sortTiles(hand);
+ selected=[];
  render();
- say("Yerden taşı aldın. Şimdi taş at.");
+ message("Yerdeki son taşı aldın. Şimdi bir taş at.");
 }
 
 function throwTile(){
- if(over||thinking)return;
-
- if(selected<0||selected>=hand.length){
-  say("Önce atacağın taşı seç.");
+ if(gameOver)return;
+ if(!drawn){
+  message("Önce taş çekmelisin.");
   return;
  }
-
- if(!firstTurn&&!drawn){
-  say("Önce taş çekmelisin.");
+ if(selected.length!==1){
+  message("Atmak için ıstakandan bir taş seç.");
   return;
  }
-
- const thrown=hand.splice(selected,1)[0];
- discard.push(thrown);
-
- selected=-1;
- openingSelection=[];
+ let i=selected[0];
+ let t=hand.splice(i,1)[0];
+ discard.push(t);
+ selected=[];
  drawn=false;
-
  render();
-
- if(hand.length===0){
-  over=true;
-  say("Oyunu kazandın!");
-  return;
- }
-
- firstTurn=false;
- say("Taşını attın. Rakipler oynuyor.");
-
- setTimeout(aiTurn,500);
+ message("Taşını attın. Rakiplerin sırası.");
+ setTimeout(botTurn,700);
 }
 
-function isValidGroup(group){
- if(group.length<3||group.length>13)return false;
+function isJoker(t){
+ return t.w||t.fake;
+}
 
- const normal=group.filter(t=>!t.w);
- const jokers=group.length-normal.length;
+function effectiveNumber(t){
+ return t.w?wildNumber:t.n;
+}
 
- if(!normal.length)return false;
+function effectiveColor(t){
+ return t.w?wildColor:t.c;
+}
 
- if(group.length<=4){
-  const sameNumber=normal.every(t=>t.n===normal[0].n);
-  const colors=new Set(normal.map(t=>t.c));
-  if(sameNumber&&colors.size===normal.length&&
-     jokers<=4-normal.length)return true;
+function groupValue(g){
+ return g.reduce((sum,t)=>sum+(isJoker(t)?wildNumber:t.n),0);
+}
+
+function isValidGroup(g){
+ if(g.length<3||g.length>13)return false;
+
+ let normal=g.filter(t=>!isJoker(t));
+ let jokers=g.length-normal.length;
+
+ if(normal.length===0)return false;
+
+ let sameColor=normal.every(t=>t.c===normal[0].c);
+ let sameNumber=normal.every(t=>t.n===normal[0].n);
+
+ if(sameNumber){
+  let colors=normal.map(t=>t.c);
+  if(new Set(colors).size!==colors.length)return false;
+  if(normal.length+jokers>4)return false;
+  return true;
  }
 
- if(!normal.every(t=>t.c===normal[0].c))return false;
+ if(sameColor){
+  let nums=normal.map(t=>t.n).sort((a,b)=>a-b);
+  if(new Set(nums).size!==nums.length)return false;
 
- const nums=normal.map(t=>t.n);
- if(new Set(nums).size!==nums.length)return false;
-
- for(let start=1;start<=14-group.length;start++){
-  const positions=nums.map(n=>n-start);
-  if(positions.every(p=>p>=0&&p<group.length)){
-   if(new Set(positions).size===normal.length&&
-      group.length-normal.length===jokers)return true;
+  let gaps=0;
+  for(let i=1;i<nums.length;i++){
+   gaps+=nums[i]-nums[i-1]-1;
   }
+
+  if(gaps>jokers)return false;
+  if(nums[0]-jokers<1 && nums[nums.length-1]+jokers>13)return false;
+  return true;
  }
 
  return false;
 }
 
-function canMakeMelds(tiles){
- if(tiles.length===0)return false;
+function findMelds(tiles){
+ if(tiles.length===0)return [];
+ if(tiles.length>18)return null;
 
- function search(remaining){
-  if(!remaining.length)return true;
-  if(remaining.length<3)return false;
+ let best=null;
+ let used=new Array(tiles.length).fill(false);
 
-  const first=remaining[0];
-
-  function build(start,group){
-   if(group.length>=3&&isValidGroup(group)){
-    const rest=remaining.filter(t=>!group.includes(t));
-    if(search(rest))return true;
-   }
-
-   for(let i=start;i<remaining.length;i++){
-    if(build(i+1,[...group,remaining[i]]))return true;
-   }
-   return false;
+ function search(start,groups){
+  let i=start;
+  while(i<tiles.length&&used[i])i++;
+  if(i===tiles.length){
+   if(!best||groups.length>best.length)best=groups.slice();
+   return;
   }
 
-  return build(1,[first]);
+  used[i]=true;
+  search(i+1,groups);
+  used[i]=false;
+
+  let available=[];
+  for(let j=i;j<tiles.length;j++){
+   if(!used[j])available.push(j);
+  }
+
+  let combos=[];
+  function combine(pos,arr){
+   if(arr.length>=3){
+    let g=arr.map(k=>tiles[k]);
+    if(isValidGroup(g))combos.push(arr.slice());
+   }
+   if(arr.length===4)return;
+   for(let k=pos;k<available.length;k++){
+    arr.push(available[k]);
+    combine(k+1,arr);
+    arr.pop();
+   }
+  }
+
+  combine(0,[i]);
+
+  for(let combo of combos){
+   combo.forEach(k=>used[k]=true);
+   groups.push(combo.map(k=>tiles[k]));
+   search(i+1,groups);
+   groups.pop();
+   combo.forEach(k=>used[k]=false);
+  }
  }
 
- return search(tiles);
-}
-
-function open101(){
- if(hasOpened){
-  say("Zaten açılış yaptın.");
-  return;
- }
-
- if(openingSelection.length<6){
-  say("En az 6 taş seçmelisin.");
-  return;
- }
-
- const tiles=openingSelection.map(i=>hand[i]);
- const total=tiles.reduce((s,t)=>s+(t.w?wildNumber:t.n),0);
-
- if(total<101){
-  say("Toplam "+total+". 101 puana ulaşmalısın.");
-  return;
- }
-
- if(!canMakeMelds(tiles)){
-  say("Seçtiğin taşlar geçerli perlere ayrılamıyor.");
-  return;
- }
-
- openedMelds.push(tiles.map(t=>({...t})));
-
- openingSelection.slice().sort((a,b)=>b-a).forEach(i=>{
-  hand.splice(i,1);
- });
-
- openingSelection=[];
- selected=-1;
- hasOpened=true;
- render();
- say("101 açıldı! Toplam: "+total);
-}
-
-function chooseDiscard(p){
- let best=0,score=Infinity;
- p.forEach((t,i)=>{
-  let value=t.w?1000:t.n;
-  p.forEach((x,j)=>{
-   if(i===j||x.w)return;
-   if(x.n===t.n&&x.c!==t.c)value+=4;
-   if(x.c===t.c&&Math.abs(x.n-t.n)<=2)value+=3;
-  });
-  if(value<score){score=value;best=i;}
- });
+ search(0,[]);
  return best;
 }
 
-function aiTurn(){
- if(over)return;
- thinking=true;
-
- const names=["Ali","Mehmet","Hasan"];
- const moves=[];
-
- for(let i=0;i<bots.length;i++){
-  const p=bots[i];
-  if(!deck.length)break;
-
-  p.push(deck.pop());
-  const idx=chooseDiscard(p);
-  discard.push(p.splice(idx,1)[0]);
-  moves.push(names[i]+" oynadı");
+function open101(){
+ if(gameOver||opened)return;
+ if(drawn){
+  message("Önce elindeki taşı atmalısın.");
+  return;
+ }
+ if(selected.length<3){
+  message("Açmak için en az 3 taş seçmelisin.");
+  return;
  }
 
- thinking=false;
+ let tiles=selected.map(i=>hand[i]);
+ let groups=findMelds(tiles);
+
+ if(!groups||groups.flat().length!==tiles.length){
+  message("Seçtiğin taşlar geçerli perlere ayrılamıyor.");
+  return;
+ }
+
+ let total=groups.reduce((s,g)=>s+groupValue(g),0);
+
+ if(total<101){
+  message("Açmak için perlerin toplamı en az 101 olmalı. Toplam: "+total);
+  return;
+ }
+
+ openedGroups.push(...groups);
+ removeSelected();
+ opened=true;
+ selected=[];
  render();
- say(moves.length?moves.join(" • ")+" • Sıra sende!":"Sıra sende!");
+ message("Tebrikler! 101 açtın. Toplam puan: "+total);
+}
+
+function removeSelected(){
+ let indexes=selected.slice().sort((a,b)=>b-a);
+ indexes.forEach(i=>hand.splice(i,1));
+}
+
+function openPairs(){
+ if(gameOver||pairsOpened||opened)return;
+ if(drawn){
+  message("Önce elindeki taşı atmalısın.");
+  return;
+ }
+
+ if(selected.length!==10){
+  message("Çift açmak için tam 10 taş, yani 5 çift seçmelisin.");
+  return;
+ }
+
+ let tiles=selected.map(i=>hand[i]);
+ let used=new Array(tiles.length).fill(false);
+ let pairs=[];
+
+ for(let i=0;i<tiles.length;i++){
+  if(used[i])continue;
+  let found=-1;
+  for(let j=i+1;j<tiles.length;j++){
+   if(used[j])continue;
+   if(isPair(tiles[i],tiles[j])){
+    found=j;
+    break;
+   }
+  }
+  if(found<0){
+   message("Seçtiğin taşlar 5 geçerli çift oluşturmuyor.");
+   return;
+  }
+  used[i]=true;
+  used[found]=true;
+  pairs.push([tiles[i],tiles[found]]);
+ }
+
+ if(pairs.length!==5)return;
+
+ openedGroups.push(...pairs);
+ removeSelected();
+ pairsOpened=true;
+ opened=true;
+ selected=[];
+ render();
+ message("5 çift başarıyla açıldı!");
+}
+
+function isPair(a,b){
+ if(isJoker(a)&&isJoker(b))return false;
+ if(isJoker(a)||isJoker(b))return true;
+ return a.n===b.n&&a.c===b.c;
+}
+
+function autoArrangePairs(){
+ if(gameOver)return;
+
+ let remaining=hand.slice();
+ let pairs=[];
+ let used=new Array(remaining.length).fill(false);
+
+ for(let i=0;i<remaining.length;i++){
+  if(used[i])continue;
+  for(let j=i+1;j<remaining.length;j++){
+   if(used[j])continue;
+   if(isPair(remaining[i],remaining[j])){
+    used[i]=true;
+    used[j]=true;
+    pairs.push([i,j]);
+    break;
+   }
+  }
+ }
+
+ let pairIndexes=pairs.flat();
+ selected=pairIndexes;
+ render();
+
+ if(pairs.length>=5){
+  message(pairs.length+" çift bulundu. İlk 5 çifti açmak için 10 taş seçebilirsin.");
+ }else{
+  message(pairs.length+" çift bulundu. Çift açmak için 5 çift gerekiyor.");
+ }
+}
+
+function botTurn(){
+ if(gameOver)return;
+ if(deck.length===0){
+  message("Taş havuzu bitti. Yeni oyun başlatabilirsin.");
+  return;
+ }
+
+ let bot=bots[0];
+ bot.push(deck.pop());
+
+ let randomIndex=Math.floor(Math.random()*bot.length);
+ let thrown=bot.splice(randomIndex,1)[0];
+ discard.push(thrown);
+
+ render();
+ message("Rakip oynadı. Sıra sende. Bir taş çek veya yerdeki taşı al.");
 }
 
 newGame();
-
 </script>
 </body>
 </html>
