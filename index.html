@@ -106,7 +106,7 @@ button:last-child{background:linear-gradient(145deg,#315b4b,#173b30);color:white
   <button onclick="newGame()">🔄 Yeni Oyun</button>
  </div>
  <div class="footer">KAYI OKEY © 2026<br>İyi eğlenceler!</div>
-\u003C \"/main>
+</main>
  <script>
 const COLORS=["red","blue","black","yellow"];
 let deck=[],hand=[],bots=[],discard=[];
@@ -282,12 +282,13 @@ area.style.minHeight="94px";
  });
 }
 
-function draw(){
 
- if(over||thinking||drawn||hand.length!==22){
+function draw(){
+ if(over||thinking||drawn||hand.length!==21){
   say("Şu anda taş çekemezsin.");
   return;
  }
+
  if(!deck.length){
   say("Taş havuzu boş!");
   return;
@@ -296,10 +297,13 @@ function draw(){
  hand.push(deck.pop());
  drawn=true;
  selected=-1;
+
  sortTiles(hand);
  render();
+
  say("Taş çektin. Şimdi atmak istediğin taşı seç.");
 }
+  
 
 function take(){
 if(over||thinking||drawn||hand.length!==21||firstTurn){
@@ -500,6 +504,7 @@ function canMakeMelds(tiles){
  say("101 açılışın geçerli! Toplam: "+total);
  }
 
+
 function throwTile(){
  if(over||thinking)return;
 
@@ -513,7 +518,8 @@ function throwTile(){
   return;
  }
 
- if(hand.length!==22 && hand.length!==23){
+ if(hand.length!==22){
+  say("Taş sayısı uygun değil.");
   return;
  }
 
@@ -524,15 +530,12 @@ function throwTile(){
  firstTurn=false;
 
  render();
+
  say("Taşını attın. Rakipler düşünüyor...");
 
  setTimeout(aiTurn,700);
 }
-
-newGame();
-</script>
-</body>
-</html>
+  
 
 
  
