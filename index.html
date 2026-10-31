@@ -75,10 +75,24 @@ button:last-child{background:linear-gradient(145deg,#315b4b,#173b30);color:white
   <div class="rack" id="rack2"></div>
  </div>
   </div>
-   <div class="middle">
-  <div class="pile">GÖSTERGE<div
-   <div class="pile">OKEY<div id="joker"></div></div>
-   <div class="pile">ATILAN<div id="discard"></div></div>
+
+<div class="middle">
+  <div class="pile">
+    GÖSTERGE
+    <div id="indicator"></div>
+  </div>
+
+  <div class="pile">
+    OKEY
+    <div id="joker"></div>
+  </div>
+
+  <div class="pile">
+    ATILAN
+    <div id="discard"></div>
+  </div>
+</div>
+  
   </div>
   <div id="status">Kayı Okey'e hoş geldin!</div>
  </section>
@@ -135,6 +149,7 @@ function tileHTML(t){
 function sortTiles(a){a.sort((x,y)=>x.c-y.c||x.n-y.n);}
 console.log("OYUN DOSYASI ÇALIŞTI");
   console.log("DESTE SON DURUM:", deck.length);
+ 
   function newGame(){
  deck=[];
 
