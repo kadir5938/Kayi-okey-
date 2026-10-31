@@ -75,7 +75,8 @@ button:last-child{background:linear-gradient(145deg,#315b4b,#173b30);color:white
   <div class="rack" id="rack2"></div>
  </div>
   </div>
-   <div class="pile">GÖSTERGE<div id="indicator"></div></div>
+   <div class="middle">
+  <div class="pile">GÖSTERGE<div
    <div class="pile">OKEY<div id="joker"></div></div>
    <div class="pile">ATILAN<div id="discard"></div></div>
   </div>
@@ -91,7 +92,7 @@ button:last-child{background:linear-gradient(145deg,#315b4b,#173b30);color:white
   <button onclick="newGame()">🔄 Yeni Oyun</button>
  </div>
  <div class="footer">KAYI OKEY © 2026<br>İyi eğlenceler!</div>
-\u003Cdiv class=\"rack\" id=\"rack1\">\u003C/div></main>
+\u003C \"/main>
  <script>
 const COLORS=["red","blue","black","yellow"];
 let deck=[],hand=[],bots=[],discard=[];
@@ -230,7 +231,11 @@ function render(){
 
  const area=document.getElementById("hand");
  area.innerHTML="";
-
+ 
+area.style.display="flex";
+area.style.visibility="visible";
+area.style.opacity="1";
+area.style.minHeight="94px";
  console.log("ISTAKA TAŞ SAYISI:",hand.length);
 
  hand.forEach((t,i)=>{
