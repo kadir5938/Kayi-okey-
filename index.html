@@ -112,6 +112,7 @@ button:last-child{background:linear-gradient(145deg,#315b4b,#173b30);color:white
  <script>
 const COLORS=["red","blue","black","yellow"];
 let deck=[],hand=[],bots=[],discard=[];
+  let openedMelds=[];
 let indicator,selected=-1,drawn=false,over=false,firstTurn=true;
 let openingSelection=[];
   let wildNumber=0,wildColor=0,thinking=false;
@@ -202,6 +203,7 @@ console.log("OYUN DOSYASI ÇALIŞTI");
 
  selected=-1;
  openingSelection=[];
+   openedMelds=[];
  drawn=false;
  over=false;
  firstTurn=true;
