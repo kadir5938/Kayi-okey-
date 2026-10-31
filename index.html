@@ -499,7 +499,10 @@ function open101(){
  }
 
  openedMelds.push(tiles.map(t=>({...t})));
-
+ 
+console.log("MASAYA AÇILAN PERLER:", openedMelds);
+console.log("AÇILAN PER SAYISI:", openedMelds.length);
+ 
  const indexes=openingSelection.slice().sort((a,b)=>b-a);
 
  indexes.forEach(i=>{
