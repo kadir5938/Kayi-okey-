@@ -295,7 +295,7 @@ function say(s){
 
 function tileHTML(t){
  if(!t)return "";
- const value=t.w?"★":t.n;
+ const value=t.fake?"★":t.n;
  return `<span class="tile ${COLORS[t.c]}">${value}</span>`;
 }
 
