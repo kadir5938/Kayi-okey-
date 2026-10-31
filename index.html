@@ -219,11 +219,8 @@ function say(s){
  document.getElementById("status").textContent=s;
 }
 
+
 function render(){
- console.log("RENDER ÇALIŞTI");
-console.log("DESTE SAYISI:",deck.length);
-console.log("ELDEKİ TAŞ:",hand.length);
-console.log("RAKİPLER:",bots.map(p=>p.length));
  document.getElementById("indicator").innerHTML=tileHTML(indicator);
 
  document.getElementById("joker").innerHTML=
@@ -237,10 +234,8 @@ console.log("RAKİPLER:",bots.map(p=>p.length));
 
  bots.forEach((p,i)=>{
   document.getElementById("p"+i).textContent=p.length+" taş";
-
   const rack=document.getElementById("rack"+i);
   rack.innerHTML="";
-
   p.forEach(()=>{
    const t=document.createElement("span");
    t.className="back-tile";
@@ -248,21 +243,32 @@ console.log("RAKİPLER:",bots.map(p=>p.length));
   });
  });
 
+ // MASAYA AÇILAN PERLER
+ const openedArea=document.getElementById("openedMelds");
+ if(openedArea){
+  openedArea.innerHTML="";
+  openedMelds.forEach(meld=>{
+   const group=document.createElement("div");
+   group.style.display="flex";
+   group.style.flexWrap="wrap";
+   group.style.margin="5px";
+   group.innerHTML=meld.map(t=>tileHTML(t)).join("");
+   openedArea.appendChild(group);
+  });
+ }
+
+ // KENDİ ISTAKAM
  const area=document.getElementById("hand");
  area.innerHTML="";
- 
-area.style.display="flex";
-area.style.visibility="visible";
-area.style.opacity="1";
-area.style.minHeight="94px";
- console.log("ISTAKA TAŞ SAYISI:",hand.length);
+ area.style.display="flex";
+ area.style.visibility="visible";
+ area.style.opacity="1";
+ area.style.minHeight="94px";
 
  hand.forEach((t,i)=>{
   const el=document.createElement("span");
-
   el.className="tile "+COLORS[t.c]+
-  (selected===i||openingSelection.includes(i)?" selected":"");
-
+   (selected===i||openingSelection.includes(i)?" selected":"");
   el.textContent=t.n;
 
   el.onclick=()=>{
@@ -280,8 +286,8 @@ area.style.minHeight="94px";
 
   area.appendChild(el);
  });
-}
-
+     }
+   
 
 function draw(){
  if(over||thinking||drawn||hand.length!==21){
@@ -470,42 +476,17 @@ function canMakeMelds(tiles){
 
  return search(tiles.map((t,i)=>i));
 }
- function open101(){
- const tiles=openingSelection.map(i=>hand[i]);
-
- if(tiles.length<6){
-  say("En az iki geçerli per seçmelisin.");
-  return;
- }
-
- const total=tiles.reduce((sum,t)=>sum+t.n,0);
-
- if(total<101){
-  say("Toplam "+total+". 101 puana ulaşmalısın.");
-  return;
- }
-
- if(!canMakeMelds(tiles)){
-  say("Seçtiğin taşlar geçerli perlere ayrılamıyor.");
-  return;
- }
-
- const sorted=openingSelection.sort((a,b)=>b-a);
-
- sorted.forEach(i=>{
-  hand.splice(i,1);
- });
-
- openingSelection=[];
- selected=-1;
-
- render();
-
- say("101 açılışın geçerli! Toplam: "+total);
- }
-
-
-
+ function open101()
+ { const tiles= openingSelection.map(i=>hand);
+if(tiles.length<6){ say("En az iki geçerli per seçmelisin.");
+                   return; } const total= tiles.reduce((s,t)=s+t.n,0); 
+  if(total<101){ say("Toplam "+total+". 101 puana ulaşmalısın.");
+                return; } if(!canMakeMelds(tiles))
+  { say("Seçtiğin taşlar geçerli perlere ayrılamıyor."); 
+   return; } openedMelds.push(tiles.map(t=>({...t}));
+openingSelection.forEach(i=>hand.splice(i,1));
+  openingSelection=[]; 
+  selected=-1; rendered(); say("101 açılışın geçerli! Toplam: "+total); }
 function throwTile(){
  if(over||thinking)return;
 
