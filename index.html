@@ -476,52 +476,43 @@ function canMakeMelds(tiles){
 
  return search(tiles.map((t,i)=>i));
 }
- function open101()
- { const tiles= openingSelection.map(i=>hand);
-if(tiles.length<6){ say("En az iki geçerli per seçmelisin.");
-                   return; } const total= tiles.reduce((s,t)=s+t.n,0); 
-  if(total<101){ say("Toplam "+total+". 101 puana ulaşmalısın.");
-                return; } if(!canMakeMelds(tiles))
-  { say("Seçtiğin taşlar geçerli perlere ayrılamıyor."); 
-   return; } openedMelds.push(tiles.map(t=>({...t}));
-openingSelection.forEach(i=>hand.splice(i,1));
-  openingSelection=[]; 
-  selected=-1; rendered(); say("101 açılışın geçerli! Toplam: "+total); }
-function throwTile(){
- if(over||thinking)return;
-
- if(!firstTurn&&!drawn){
-  say("Önce taş çekmelisin.");
+ 
+function open101(){
+ if(openingSelection.length<6){
+  say("En az iki geçerli per seçmelisin.");
   return;
  }
 
- if(selected<0){
-  say("Lütfen atmak istediğin taşı seç.");
+ const tiles=openingSelection.map(i=>hand[i]);
+
+ const total=tiles.reduce((s,t)=>s+t.n,0);
+
+ if(total<101){
+  say("Toplam "+total+". 101 puana ulaşmalısın.");
   return;
  }
 
- if(firstTurn && hand.length!==22){
-  say("İlk atış için 22 taş gerekli.");
+ if(!canMakeMelds(tiles)){
+  say("Seçtiğin taşlar geçerli perlere ayrılamıyor.");
   return;
  }
 
- if(!firstTurn && hand.length!==22){
-  say("Taş sayısı uygun değil.");
-  return;
- }
+ openedMelds.push(tiles.map(t=>({...t})));
 
- const index=selected;
- discard.push(hand.splice(index,1)[0]);
+ const indexes=openingSelection.slice().sort((a,b)=>b-a);
 
+ indexes.forEach(i=>{
+  hand.splice(i,1);
+ });
+
+ openingSelection=[];
  selected=-1;
- drawn=false;
- firstTurn=false;
 
  render();
- say("Taşını attın. Rakipler düşünüyor...");
 
- setTimeout(aiTurn,700);
-}
+ say("101 açılışın geçerli! Toplam: "+total);
+  }
+  
   
   
 
