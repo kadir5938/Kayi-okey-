@@ -367,7 +367,7 @@ function newGame(){
 function render(){
  document.getElementById("indicator").innerHTML=tileHTML(indicator);
  document.getElementById("joker").innerHTML=
- tileHTML({n:wildNumber,c:wildColor,w:true});
+ tileHTML({n:wildNumber,c:wildColor});
  document.getElementById("discard").innerHTML=
  tileHTML(discard[discard.length-1]);
 
