@@ -426,34 +426,58 @@ function isValidGroup(group){
 }
   
 
+
 function canMakeMelds(tiles){
+ if(!Array.isArray(tiles))return false;
  if(tiles.length===0)return true;
  if(tiles.length<3)return false;
 
- function search(start,group,used){
-  if(group.length>=3 && validGroup(group)){
-   const rest=tiles.filter((t,i)=>!used.includes(i));
+ function search(rest){
+  if(rest.length===0)return true;
+  if(rest.length<3)return false;
 
-   if(canMakeMelds(rest))return true;
+  const first=rest[0];
+
+  // Üçlü perleri dene
+  for(let i=1;i<rest.length-1;i++){
+   for(let j=i+1;j<rest.length;j++){
+
+    const group=[first,rest[i],rest[j]];
+
+    if(isValidGroup(group)){
+     const next=rest.filter((t,k)=>
+      k!==0&&k!==i&&k!==j
+     );
+
+     if(search(next))return true;
+    }
+   }
   }
 
-  if(group.length>=13)return false;
+  // Dörtlü perleri dene
+  for(let i=1;i<rest.length-2;i++){
+   for(let j=i+1;j<rest.length-1;j++){
+    for(let k=j+1;k<rest.length;k++){
 
-  for(let i=start;i<tiles.length;i++){
-   if(search(
-    i+1,
-    [...group,tiles[i]],
-    [...used,i]
-   )){
-    return true;
+     const group=[first,rest[i],rest[j],rest[k]];
+
+     if(isValidGroup(group)){
+      const next=rest.filter((t,n)=>
+       n!==0&&n!==i&&n!==j&&n!==k
+      );
+
+      if(search(next))return true;
+     }
+    }
    }
   }
 
   return false;
  }
 
- return search(1,[tiles[0]],[0]);
+ return search(tiles);
 }
+  
 
 function open101(){
  const tiles=openingSelection.map(i=>hand[i]);
