@@ -296,63 +296,83 @@ function tilePoints(t){
 }
 
 function isValidGroup(group){
- if(group.length<3 || group.length>13)return false;
 
- let normal=group.filter(t=>!t.w&&!t.fake);
- let jokers=group.length-normal.length;
+function isValidGroup(group){
+ if(!Array.isArray(group))return false;
 
- if(normal.length<1)return false;
+ const len=group.length;
+ if(len<3 || len>13)return false;
 
- let sameColor=normal.every(t=>t.c===normal[0].c);
- let sameNumber=normal.every(t=>t.n===normal[0].n);
+ const normal=group.filter(t=>!t.w&&!t.fake);
+ const jokers=len-normal.length;
 
- if(sameColor){
-  let nums=normal.map(t=>t.n).sort((a,b)=>a-b);
-  let needed=0;
+ if(normal.length===0)return false;
 
-  for(let i=1;i<nums.length;i++){
-   if(nums[i]===nums[i-1])return false;
-   needed+=nums[i]-nums[i-1]-1;
-  }
+ // SIRALI PER: Aynı renk, farklı sayılar
+ let sequence=false;
 
-  return needed<=jokers;
- }
+ if(normal.every(t=>t.c===normal[0].c)){
+  const nums=normal.map(t=>Number(t.n)).sort((a,b)=>a-b);
 
- if(sameNumber){
-  let colors=new Set(normal.map(t=>t.c));
-  return colors.size===normal.length;
- }
+  if(new Set(nums).size===nums.length){
+   const missing=nums[nums.length-1]-nums[0]+1-normal.length;
+   const extra=jokers-missing;
+   const available=(nums[0]-1)+(13-nums[nums.length-1]);
 
- return false;
-}
-
-function groupPoints(group){
- return group.reduce((sum,t)=>sum+tilePoints(t),0);
-}
-function tileValue(t,arr,index){
- if(t.w)return 20;
- let score=0;
-
- for(let i=0;i<arr.length;i++){
-  if(i===index)continue;
-  const x=arr[i];
-
-  if(x.w){
-   score+=2;
-   continue;
-  }
-
-  if(x.n===t.n&&x.c!==t.c)score+=4;
-
-  if(x.c===t.c){
-   const gap=Math.abs(x.n-t.n);
-   if(gap===1)score+=4;
-   else if(gap===2)score+=1.5;
+   sequence=missing>=0 && extra>=0 && extra<=available;
   }
  }
- return score;
+
+ // AYNI SAYI: Farklı renkler
+ let set=false;
+
+ if(len<=4 && normal.every(t=>t.n===normal[0].n)){
+  const colors=new Set(normal.map(t=>t.c));
+  set=colors.size===normal.length &&
+      jokers<=4-normal.length;
+ }
+
+ return sequence || set;
 }
 
+function isValidGroup(group){
+ if(!Array.isArray(group))return false;
+
+ const len=group.length;
+ if(len<3 || len>13)return false;
+
+ const normal=group.filter(t=>!t.w&&!t.fake);
+ const jokers=len-normal.length;
+
+ if(normal.length===0)return false;
+
+ // SIRALI PER: Aynı renk, farklı sayılar
+ let sequence=false;
+
+ if(normal.every(t=>t.c===normal[0].c)){
+  const nums=normal.map(t=>Number(t.n)).sort((a,b)=>a-b);
+
+  if(new Set(nums).size===nums.length){
+   const missing=nums[nums.length-1]-nums[0]+1-normal.length;
+   const extra=jokers-missing;
+   const available=(nums[0]-1)+(13-nums[nums.length-1]);
+
+   sequence=missing>=0 && extra>=0 && extra<=available;
+  }
+ }
+
+ // AYNI SAYI: Farklı renkler
+ let set=false;
+
+ if(len<=4 && normal.every(t=>t.n===normal[0].n)){
+  const colors=new Set(normal.map(t=>t.c));
+  set=colors.size===normal.length &&
+      jokers<=4-normal.length;
+ }
+
+ return sequence || set;
+}
+ 
 function chooseDiscard(p){
  let best=0,bestScore=Infinity;
 
@@ -387,83 +407,60 @@ function aiTurn(){
  thinking=false;
  say(moves.length?moves.join(" • ")+" • Sıra sende!":"Sıra sende!");
 }
-
-function isValidGroup(group){
- if(!Array.isArray(group))return false;
- if(group.length<3 || group.length>13)return false;
-
- let normal=group.filter(t=>!t.w&&!t.fake);
- let jokers=group.length-normal.length;
-
- if(normal.length<1)return false;
-
- // Aynı renk, sıralı sayılar
- let sameColor=normal.every(t=>t.c===normal[0].c);
-
- if(sameColor){
-  let nums=normal.map(t=>t.n).sort((a,b)=>a-b);
-
-  if(new Set(nums).size!==nums.length)return false;
-
-  let needed=0;
-
-  for(let i=1;i<nums.length;i++){
-   needed+=nums[i]-nums[i-1]-1;
-  }
-
-  return needed<=jokers;
- }
-
- // Aynı sayı, farklı renkler
- let sameNumber=normal.every(t=>t.n===normal[0].n);
-
- if(sameNumber){
-  let colors=new Set(normal.map(t=>t.c));
-  return colors.size===normal.length;
- }
-
- return false;
-}
+ 
 
 function canMakeMelds(tiles){
  if(!Array.isArray(tiles))return false;
  if(tiles.length===0)return true;
  if(tiles.length<3)return false;
 
- function search(rest){
-  if(rest.length===0)return true;
-  if(rest.length<3)return false;
+ const memo=new Map();
+
+ function search(indices){
+  if(indices.length===0)return true;
+
+  const key=indices.join(",");
+  if(memo.has(key))return memo.get(key);
+  if(indices.length<3)return false;
+
+  let found=false;
+  const first=indices[0];
 
   function build(start,group,used){
+   if(found)return;
+
    if(group.length>=3 && isValidGroup(group)){
-    const remaining=rest.filter((t,i)=>!used.includes(i));
+    const remaining=indices.filter(i=>!used.includes(i));
 
-    if(search(remaining))return true;
-   }
-
-   if(group.length>=13)return false;
-
-   for(let i=start;i<rest.length;i++){
-    if(build(
-     i+1,
-     [...group,rest[i]],
-     [...used,i]
-    )){
-     return true;
+    if(search(remaining)){
+     found=true;
+     return;
     }
    }
 
-   return false;
+   if(group.length>=13)return;
+
+   for(let j=start;j<indices.length;j++){
+    const idx=indices[j];
+
+    build(
+     j+1,
+     [...group,tiles[idx]],
+     [...used,idx]
+    );
+
+    if(found)return;
+   }
   }
 
-  return build(1,[rest[0]],[0]);
+  build(1,[tiles[first]],[first]);
+  memo.set(key,found);
+  return found;
  }
 
- return search(tiles);
+ return search(tiles.map((t,i)=>i));
 }
-  
-  
-
+ 
 function open101(){
  const tiles=openingSelection.map(i=>hand[i]);
 
