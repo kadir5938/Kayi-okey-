@@ -447,8 +447,7 @@ function canMakeMelds(tiles){
 
  return search(tiles.map((t,i)=>i));
 }
- 
-function open101(){
+ function open101(){
  const tiles=openingSelection.map(i=>hand[i]);
 
  if(tiles.length<6){
@@ -468,8 +467,20 @@ function open101(){
   return;
  }
 
- say("Tebrikler! 101 açılışın geçerli. Toplam: "+total);
-}
+ const sorted=openingSelection.sort((a,b)=>b-a);
+
+ sorted.forEach(i=>{
+  hand.splice(i,1);
+ });
+
+ openingSelection=[];
+ selected=-1;
+
+ render();
+
+ say("101 açılışın geçerli! Toplam: "+total);
+ }
+
 function throwTile(){
  if(over||thinking)return;
 
