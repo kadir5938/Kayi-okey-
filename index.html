@@ -292,10 +292,7 @@ if(over||thinking||drawn||hand.length!==21||firstTurn){
  say("Yerden taşı aldın. Şimdi bir taş seç ve at.");
 }
 function tilePoints(t){
- return t.n;
-}
-
-function isValidGroup(group){
+ 
 
 function isValidGroup(group){
  if(!Array.isArray(group))return false;
@@ -303,12 +300,12 @@ function isValidGroup(group){
  const len=group.length;
  if(len<3 || len>13)return false;
 
- const normal=group.filter(t=>!t.w&&!t.fake);
+ const normal=group.filter(t=>!t.w && !t.fake);
  const jokers=len-normal.length;
 
  if(normal.length===0)return false;
 
- // SIRALI PER: Aynı renk, farklı sayılar
+ // SIRALI PER
  let sequence=false;
 
  if(normal.every(t=>t.c===normal[0].c)){
@@ -317,17 +314,21 @@ function isValidGroup(group){
   if(new Set(nums).size===nums.length){
    const missing=nums[nums.length-1]-nums[0]+1-normal.length;
    const extra=jokers-missing;
+
    const available=(nums[0]-1)+(13-nums[nums.length-1]);
 
-   sequence=missing>=0 && extra>=0 && extra<=available;
+   sequence=missing>=0 &&
+            extra>=0 &&
+            extra<=available;
   }
  }
 
- // AYNI SAYI: Farklı renkler
+ // AYNI SAYI PERİ
  let set=false;
 
- if(len<=4 && normal.every(t=>t.n===normal[0].n)){
+ if(len<=4 && normal.every(t=>Number(t.n)===Number(normal[0].n))){
   const colors=new Set(normal.map(t=>t.c));
+
   set=colors.size===normal.length &&
       jokers<=4-normal.length;
  }
