@@ -299,21 +299,23 @@ function isValidGroup(group){
  if(group.length<3 || group.length>4)return false;
 
  let normal=group.filter(t=>!t.w&&!t.fake);
+ let jokers=group.length-normal.length;
 
- if(normal.length<2)return false;
+ if(normal.length<1)return false;
 
  let sameColor=normal.every(t=>t.c===normal[0].c);
  let sameNumber=normal.every(t=>t.n===normal[0].n);
 
  if(sameColor){
   let nums=normal.map(t=>t.n).sort((a,b)=>a-b);
-  let gaps=0;
+  let needed=0;
 
   for(let i=1;i<nums.length;i++){
-   gaps+=nums[i]-nums[i-1]-1;
+   if(nums[i]===nums[i-1])return false;
+   needed+=nums[i]-nums[i-1]-1;
   }
 
-  return gaps<=group.length-normal.length;
+  return needed<=jokers;
  }
 
  if(sameNumber){
