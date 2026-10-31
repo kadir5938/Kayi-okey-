@@ -296,7 +296,7 @@ function tilePoints(t){
 }
 
 function isValidGroup(group){
- if(group.length<3 || group.length>4)return false;
+ if(group.length<3 || group.length>13)return false;
 
  let normal=group.filter(t=>!t.w&&!t.fake);
  let jokers=group.length-normal.length;
@@ -390,7 +390,7 @@ function aiTurn(){
 
 function isValidGroup(group){
  if(!Array.isArray(group))return false;
- if(group.length<3 || group.length>4)return false;
+ if(group.length<3 || group.length>13)return false;
 
  let normal=group.filter(t=>!t.w&&!t.fake);
  let jokers=group.length-normal.length;
@@ -424,8 +424,6 @@ function isValidGroup(group){
 
  return false;
 }
-  
-
 
 function canMakeMelds(tiles){
  if(!Array.isArray(tiles))return false;
@@ -436,47 +434,34 @@ function canMakeMelds(tiles){
   if(rest.length===0)return true;
   if(rest.length<3)return false;
 
-  const first=rest[0];
+  function build(start,group,used){
+   if(group.length>=3 && isValidGroup(group)){
+    const remaining=rest.filter((t,i)=>!used.includes(i));
 
-  // Üçlü perleri dene
-  for(let i=1;i<rest.length-1;i++){
-   for(let j=i+1;j<rest.length;j++){
+    if(search(remaining))return true;
+   }
 
-    const group=[first,rest[i],rest[j]];
+   if(group.length>=13)return false;
 
-    if(isValidGroup(group)){
-     const next=rest.filter((t,k)=>
-      k!==0&&k!==i&&k!==j
-     );
-
-     if(search(next))return true;
+   for(let i=start;i<rest.length;i++){
+    if(build(
+     i+1,
+     [...group,rest[i]],
+     [...used,i]
+    )){
+     return true;
     }
    }
+
+   return false;
   }
 
-  // Dörtlü perleri dene
-  for(let i=1;i<rest.length-2;i++){
-   for(let j=i+1;j<rest.length-1;j++){
-    for(let k=j+1;k<rest.length;k++){
-
-     const group=[first,rest[i],rest[j],rest[k]];
-
-     if(isValidGroup(group)){
-      const next=rest.filter((t,n)=>
-       n!==0&&n!==i&&n!==j&&n!==k
-      );
-
-      if(search(next))return true;
-     }
-    }
-   }
-  }
-
-  return false;
+  return build(1,[rest[0]],[0]);
  }
 
  return search(tiles);
 }
+  
   
 
 function open101(){
